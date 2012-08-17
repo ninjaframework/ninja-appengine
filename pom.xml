@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.ninjaframework</groupId>
+	<artifactId>ninja-appengine</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>Google App Engine support for Ninja Framework</name>
+	<url>http://www.ninjaframework.org</url>
+
+	<!-- Deploy to central maven using the oss-parent of sonatype -->
+	<!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<modules>
+		<module>ninja-appengine-demo</module>
+	</modules>
+
+	<!-- pin encoding to utf-8 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<siteProjectVersion>${project.version}</siteProjectVersion>
+	</properties>
+
+	<!-- Fix version 1.6 of java compiler in all submodules: -->
+	<build>
+
+		<pluginManagement>
+
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<scm>
+		<url>https://github.com/reyez/ninja</url>
+		<connection>scm:git://github.com/reyez/ninja.git</connection>
+		<developerConnection>scm:git:git@github.com:reyez/ninja.git</developerConnection>
+	</scm>
+	
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/reyez/ninja/issues/</url>
+	</issueManagement>
+
+	<mailingLists>
+		<mailingList>
+			<name>Ninja Web Framework Users</name>
+			<post>ninja-framework@googlegroups.com</post>
+			<archive>http://groups.google.com/group/ninja-framework</archive>
+		</mailingList>
+	</mailingLists>
+</project>

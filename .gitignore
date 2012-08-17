@@ -1,0 +1,11 @@
+.DS_Store
+.project
+.settings
+.classpath
+.project
+target
+
+# no sql DDL stuff
+*.sql
+# no h2 databases
+*.db
