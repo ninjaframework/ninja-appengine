@@ -4,66 +4,68 @@ import java.util.Map;
 
 import models.Comment;
 import ninja.Context;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.appengine.NinjaDevEnvironment;
 import ninja.params.Param;
 
 import com.google.appengine.repackaged.com.google.common.collect.Lists;
-import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
-import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 
+import filters.SetGaeEnvironment;
+
 @Singleton
+@FilterWith(SetGaeEnvironment.class)
 public class CommentController {
 
-	private final LocalServiceTestHelper helper;
-	 
-	public CommentController() {
+    //private final LocalServiceTestHelper helper;
 
-		// just a test to see if we get the built in in memory datastore up and running...
-	    helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
-	    helper.setUp();
-	    
-	    ObjectifyService.register(Comment.class);
-	}
+    @Inject
+    public CommentController(NinjaDevEnvironment ninjaDevEnvironment) {
 
-	public Result postComment(Context context, @Param("text") String text,
-			@Param("email") String email) {
-		
-		Objectify ofy = ObjectifyService.begin();
-		
-		Comment comment = new Comment();
+        ObjectifyService.register(Comment.class);
+    }
 
-		comment.text = text;
-		comment.email = email;
-		ofy.put(comment);
+    public Result postComment(Context context,
+                              @Param("text") String text,
+                              @Param("email") String email) {
 
-		return Results.redirect("/comments");
+        Objectify ofy = ObjectifyService.begin();
 
-	}
+        Comment comment = new Comment();
 
-	public Result listComments(Context context) {
+        comment.text = text;
+        comment.email = email;
+        ofy.put(comment);
 
-		Objectify ofy = ObjectifyService.begin();
+        return Results.redirect("/comments");
 
-		Query<Comment> q = ofy.query(Comment.class);
+    }
 
-		Map<String, Object> map = Maps.newHashMap();
-		
-		java.util.List<Comment> comments = Lists.newArrayList();
-		for (Comment com : q) {
+    public Result listComments(Context context) {
 
-			comments.add(com);
+        Objectify ofy = ObjectifyService.begin();
 
-		}
-		map.put("comments", comments);
+        Query<Comment> q = ofy.query(Comment.class);
 
-		return Results.html().render(map);
+        Map<String, Object> map = Maps.newHashMap();
 
-	}
+        java.util.List<Comment> comments = Lists.newArrayList();
+        for (Comment com : q) {
+
+            comments.add(com);
+
+        }
+        map.put("comments", comments);
+
+        return Results.html().render(map);
+
+    }
 
 }

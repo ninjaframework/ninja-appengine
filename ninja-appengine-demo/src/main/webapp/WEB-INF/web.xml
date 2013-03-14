@@ -4,16 +4,18 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-    <display-name>ninja</display-name>
+    <display-name>ninja-appengine-demo</display-name>
+
+    <listener>
+        <listener-class>ninja.servlet.NinjaServletListener</listener-class>
+    </listener>
 
     <filter>
-        <filter-name>dispatcher</filter-name>
-        <filter-class>ninja.NinjaServletDispatcher</filter-class>
-        <async-supported>true</async-supported>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
     </filter>
-
     <filter-mapping>
-        <filter-name>dispatcher</filter-name>
+        <filter-name>guiceFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

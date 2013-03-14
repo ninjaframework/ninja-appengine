@@ -18,6 +18,7 @@
 
 	<modules>
 		<module>ninja-appengine-demo</module>
+        <module>ninja-appengine-module</module>
 	</modules>
 
 	<!-- pin encoding to utf-8 -->
@@ -47,14 +48,14 @@
 	</build>
 
 	<scm>
-		<url>https://github.com/reyez/ninja</url>
-		<connection>scm:git://github.com/reyez/ninja.git</connection>
-		<developerConnection>scm:git:git@github.com:reyez/ninja.git</developerConnection>
+		<url>https://github.com/reyez/ninja-appengine</url>
+		<connection>scm:git://github.com/reyez/ninja-appengine.git</connection>
+		<developerConnection>scm:git:git@github.com:reyez/ninja-appengine.git</developerConnection>
 	</scm>
 	
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/reyez/ninja/issues/</url>
+		<url>https://github.com/reyez/ninja-appengine/issues/</url>
 	</issueManagement>
 
 	<mailingLists>
@@ -64,4 +65,50 @@
 			<archive>http://groups.google.com/group/ninja-framework</archive>
 		</mailingList>
 	</mailingLists>
+	
+	
+	   <profiles>
+        <!-- Do a license check by running : mvn -P license license:check -->
+        <!-- Update the license check by running : mvn -P license license:format -->
+        <profile>
+            <id>license</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.mycila.maven-license-plugin</groupId>
+                        <artifactId>maven-license-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <quiet>false</quiet>
+                            <header>src/main/resources/license-header.txt</header>
+                            <aggregate>true</aggregate>
+                            <includes>
+                                <include>**/src/**</include>
+                                <include>**/pom.xml</include>
+                            </includes>
+                            <excludes>
+                                <!-- ignore files produced during a build -->
+                                <exclude>**/target/**</exclude>
+                                <exclude>**/WEB-INF/classes/**</exclude>
+                                <exclude>**/site/**</exclude>
+                                <exclude>**/.DS_Store</exclude>
+
+                                <!-- ignore binary files -->
+                                <exclude>**/assets/**</exclude>
+                                <exclude>**/views/**</exclude>
+                            </excludes>
+                            <useDefaultExcludes>false</useDefaultExcludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
