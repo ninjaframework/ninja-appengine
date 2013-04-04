@@ -1,6 +1,6 @@
 1.0.1
 =====
-- bugfix mail agsainst "null" session while mailing.
+- bugfix mail against "null" session while mailing.
 
 
 1.0
