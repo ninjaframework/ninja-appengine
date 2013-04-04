@@ -9,6 +9,9 @@
 
 Google App Engine support for Ninja
 ===================================
+CI: https://buildhive.cloudbees.com/job/reyez/job/ninja-appengine
+Mailing list: 
+
 
 This module allows to use Ninja on the GAE easily.
 
@@ -67,14 +70,16 @@ First of all have a look at the demo application at:
 https://github.com/reyez/ninja-appengine/tree/master/ninja-appengine-demo
 
 The demo application show best how to setup
-1) pom.xml
-2) application.conf
-3) appengine-web.xml
+
+- pom.xml
+- application.conf
+- appengine-web.xml
 
 pom.xml
 -------
 
 1) Add the dependency to your pom:
+
     <dependency>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine-module</artifactId>
@@ -88,7 +93,6 @@ These profiles will allow you to correctly set the ninja mode for test and
 development:
 
    <profiles>
-        <!-- to filter appengine.xml and set correct mode on prod: -->
         <profile>
             <id>default</id>
             <properties>
@@ -108,23 +112,23 @@ development:
 
 
 3) Filter the resources to finally set the mode dev / production:
+
     <plugin>
-        <!-- Used to filter the dev mode into appengine-web.xml -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <configuration>
-                <webResources>
-                    <webResource>
-                        <directory>${basedir}/src/main/webapp/WEB-INF</directory>
-                        <includes>
-                            <include>**/*</include>
-                        </includes>
-                        <targetPath>WEB-INF</targetPath>
-                        <filtering>true</filtering>
-                    </webResource>
-                </webResources>
-            </configuration>
-        </plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+            <webResources>
+                <webResource>
+                    <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <targetPath>WEB-INF</targetPath>
+                    <filtering>true</filtering>
+                </webResource>
+            </webResources>
+        </configuration>
+    </plugin>
 
 
 
