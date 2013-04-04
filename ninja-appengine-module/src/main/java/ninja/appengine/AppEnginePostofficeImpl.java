@@ -27,61 +27,48 @@ import ninja.postoffice.commonsmail.CommonsmailHelper;
 import org.apache.commons.mail.MultiPartEmail;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * A Emailer implementation for the GAE and Ninja.
  * 
  * Very similar to the default {@link PostofficeImpl}.
  * 
- * The major difference is that it does not use a built-in smtp server,
- * but GAE's mailer session/transport facilities.
+ * The major difference is that it does not use a built-in smtp server, but
+ * GAE's mailer session/transport facilities.
  * 
  * @author ra
  */
+@Singleton
 public class AppEnginePostofficeImpl implements Postoffice {
 
     private CommonsmailHelper commonsmailHelper;
-    
+
     private Session session;
 
     @Inject
     public AppEnginePostofficeImpl(CommonsmailHelper commonsmailHelper) {
         this.commonsmailHelper = commonsmailHelper;
-        
-        createOrRecreateNewSessionWhenNeeded(session);
-        
+
+        Properties props = new Properties();
+        session = Session.getDefaultInstance(props);
+
     }
 
     @Override
     public void send(Mail mail) throws Exception {
-        
-        // If the session became unusable we recreate it:
-        createOrRecreateNewSessionWhenNeeded(session);
 
         // create a correct multipart email based on html / txt content:
-        MultiPartEmail multiPartEmail = commonsmailHelper.createMultiPartEmailWithContent(mail);
-        
+        MultiPartEmail multiPartEmail = commonsmailHelper
+                .createMultiPartEmailWithContent(mail);
+
         // fill the from, to, bcc, css and all other fields:
-        commonsmailHelper.doPopulateMultipartMailWithContent(multiPartEmail, mail);
+        commonsmailHelper.doPopulateMultipartMailWithContent(multiPartEmail,
+                mail);
 
         // And send it:
         multiPartEmail.setMailSession(session);
         multiPartEmail.send();
-    }
-    
-    
-    /**
-     * Simply checks if session is usable and recreates it.
-     * Works on the reference "session".
-     * @param session The session that should be checked or recreated.
-     */ 
-    private void createOrRecreateNewSessionWhenNeeded(Session session) {
-        
-        if (session == null) {
-            Properties props = new Properties();
-            session = Session.getDefaultInstance(props);
-        } 
-        
     }
 
 }
