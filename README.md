@@ -9,8 +9,10 @@
 
 Google App Engine support for Ninja
 ===================================
-CI: https://buildhive.cloudbees.com/job/reyez/job/ninja-appengine
-Mailing list: 
+
+- CI: https://buildhive.cloudbees.com/job/reyez/job/ninja-appengine
+- Mailing list and forum:  https://groups.google.com/forum/#!forum/ninja-framework
+- More about Ninja: http://www.ninjaframework.org
 
 
 This module allows to use Ninja on the GAE easily.
@@ -92,7 +94,7 @@ pom.xml
 These profiles will allow you to correctly set the ninja mode for test and 
 development:
 
-   <profiles>
+    <profiles>
         <profile>
             <id>default</id>
             <properties>
@@ -109,7 +111,6 @@ development:
             </properties>
         </profile>
     </profiles>
-
 
 3) Filter the resources to finally set the mode dev / production:
 
