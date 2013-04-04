@@ -26,7 +26,7 @@
     <parent>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -119,7 +119,7 @@
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-appengine-module</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
