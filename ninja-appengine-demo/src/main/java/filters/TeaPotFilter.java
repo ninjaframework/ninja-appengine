@@ -20,10 +20,7 @@ import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
-
-import org.slf4j.Logger;
-
-import com.google.inject.Inject;
+import ninja.Results;
 
 /**
  * Just a simple demo filter that changes exemplifies two things 1. Change the
@@ -35,21 +32,12 @@ import com.google.inject.Inject;
  * @author ra
  * 
  */
-public class LoggerFilter implements Filter {
-	
-	private final Logger logger;
-
-	@Inject
-	public LoggerFilter(Logger logger) {
-		this.logger = logger;
-		
-	}
+public class TeaPotFilter implements Filter {
 
 	@Override
 	public Result filter(FilterChain chain, Context context) {
 
-		logger.info("Got request from : " + context.getRequestPath());
-        return chain.next(context);
-	}
+		return Results.html().status(418).template("/views/TeaPotFilter/TeaPot.ftl.html");
 
+	}
 }

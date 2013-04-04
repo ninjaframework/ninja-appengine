@@ -16,18 +16,20 @@
 
 package conf;
 
-import com.google.inject.AbstractModule;
+import models.Comment;
+import ninja.lifecycle.Start;
+
 import com.google.inject.Singleton;
+import com.googlecode.objectify.ObjectifyService;
 
 @Singleton
-public class Module extends AbstractModule {
-    
+public class Objectify {
 
-    protected void configure() {
-
-        bind(Objectify.class);
+    @Start(order=10)
+    public void registerModels() {
         
-        //install(AppEngineModule.class);
+        ObjectifyService.register(Comment.class);
+        
     }
 
 }

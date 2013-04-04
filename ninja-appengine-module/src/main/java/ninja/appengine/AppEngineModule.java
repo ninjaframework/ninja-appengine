@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-package conf;
+package ninja.appengine;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 
-@Singleton
-public class Module extends AbstractModule {
-    
+/**
+ * use it in your applications module like:
+ * 
+ * <code>
+ *  install(new AppEngineModule())
+ * </code>
+ *
+ */
+public class AppEngineModule extends AbstractModule {
 
     protected void configure() {
-
-        bind(Objectify.class);
-        
-        //install(AppEngineModule.class);
+        bind(NinjaDevEnvironment.class).in(Singleton.class);
     }
 
 }

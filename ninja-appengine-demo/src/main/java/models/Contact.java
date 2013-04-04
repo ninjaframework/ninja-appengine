@@ -14,20 +14,27 @@
  * limitations under the License.
  */
 
-package conf;
+package models;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
+public class Contact {
 
-@Singleton
-public class Module extends AbstractModule {
+    private String name;
+    private String email;
+    public String description;
     
-
-    protected void configure() {
-
-        bind(Objectify.class);
-        
-        //install(AppEngineModule.class);
+    public Contact() {}
+    
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

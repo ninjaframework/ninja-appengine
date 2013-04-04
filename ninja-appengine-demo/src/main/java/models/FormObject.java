@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-package conf;
+package models;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
-
-@Singleton
-public class Module extends AbstractModule {
+public class FormObject {
     
-
-    protected void configure() {
-
-        bind(Objectify.class);
-        
-        //install(AppEngineModule.class);
-    }
+    public String name;
 
 }

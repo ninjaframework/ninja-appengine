@@ -1,3 +1,19 @@
+/**
+ * Copyright (C) 2012 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ninja.appengine;
 
 import java.io.File;
@@ -12,7 +28,15 @@ import com.google.appengine.tools.development.ApiProxyLocalFactory;
 import com.google.appengine.tools.development.LocalServerEnvironment;
 import com.google.apphosting.api.ApiProxy;
 import com.google.apphosting.api.ApiProxy.Environment;
+import com.google.inject.Singleton;
 
+/**
+ * A simple Environment for developing GAE applications within Ninja.
+ * 
+ * @author ra
+ *
+ */
+@Singleton
 public class NinjaDevEnvironment implements Environment, LocalServerEnvironment {
 
 
@@ -21,16 +45,20 @@ public class NinjaDevEnvironment implements Environment, LocalServerEnvironment 
         // Create a fake development environment if not run in the Google SDK
 
         if (ApiProxy.getCurrentEnvironment() == null) {
+            
+
+            System.out.println("No production App Engine environment found - starting local development environment");
+
 
             ApiProxyLocalFactory factory = new ApiProxyLocalFactory();
             ApiProxyLocal proxy = factory.create(this);
             ApiProxy.setDelegate(proxy);
+            
+            File fileForLocalDataStoreService = new File("target/ninja-appengine/local_datastore_service");
+            System.out.println("Local datastore at: " + fileForLocalDataStoreService.getAbsolutePath());
 
             proxy.setProperty(LocalDatastoreService.BACKING_STORE_PROPERTY,
-                    new File("/tmp/datastore").getAbsolutePath());
-
-            System.out
-                    .println("No App Engine environemnt found - starting local dev environment");
+                    fileForLocalDataStoreService.getAbsolutePath());
 
             ApiProxy.setEnvironmentForCurrentThread(this);
 
