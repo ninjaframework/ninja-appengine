@@ -62,6 +62,7 @@ Deployment
 ==========
 
 Is as easy as:
+
     mvn clean install gae:deploy -Pdeployment
 
 
