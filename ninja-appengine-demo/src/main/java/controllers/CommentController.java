@@ -27,7 +27,7 @@ import ninja.appengine.AppEngineFilter;
 import ninja.appengine.NinjaDevEnvironment;
 import ninja.params.Param;
 
-import com.google.appengine.repackaged.com.google.common.collect.Lists;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -41,21 +41,17 @@ public class CommentController {
 
     //private final LocalServiceTestHelper helper;
 
-    @Inject
-    public CommentController(NinjaDevEnvironment ninjaDevEnvironment) {
-
-        
-    }
 
     public Result postComment(Context context,
                               @Param("text") String text,
                               @Param("email") String email) {
 
+        
         Objectify ofy = ObjectifyService.begin();
 
         Comment comment = new Comment();
 
-        comment.text = text;
+        comment.text = text + "test333";
         comment.email = email;
         ofy.put(comment);
 

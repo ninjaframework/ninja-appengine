@@ -20,6 +20,7 @@ import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
+import ninja.utils.NinjaProperties;
 
 import com.google.apphosting.api.ApiProxy;
 import com.google.inject.Inject;
@@ -32,38 +33,48 @@ import com.google.inject.Singleton;
  * You can simply add the filter on top of the class
  * 
  * <code>
- * @FilterWith(AppEngineFilter.class)
- * public class MyController {.... }
- * </code>
  * 
- * This filter ensures that the threadlocal of that controller is populated
- * with the correct ApiProxy bindings for the dev environment.
+ * @FilterWith(AppEngineFilter.class) public class MyController {.... } </code>
  * 
- * This also means that in theory this filter is completely useless in
- * the prod environment.
+ *                                    This filter ensures that the threadlocal
+ *                                    of that controller is populated with the
+ *                                    correct ApiProxy bindings for the dev
+ *                                    environment.
+ * 
+ *                                    This also means that in theory this filter
+ *                                    is completely useless in the prod
+ *                                    environment.
  * 
  * @author ra
  * 
  */
 @Singleton
 public class AppEngineFilter implements Filter {
-
-    private NinjaDevEnvironment ninjaDevEnvironment;
+    NinjaProperties ninjaProperties;
 
     @Inject
-    public AppEngineFilter(NinjaDevEnvironment ninjaDevEnvironment) {
+    public AppEngineFilter(NinjaProperties ninjaProperties) {
 
-        this.ninjaDevEnvironment = ninjaDevEnvironment;
-        
+        this.ninjaProperties = ninjaProperties;
+
     }
 
     @Override
     public Result filter(FilterChain chain, Context context) {
 
-        // not running on GAE => set the dev environment.
-        if (ApiProxy.getCurrentEnvironment() == null) {
-            ApiProxy.setEnvironmentForCurrentThread(ninjaDevEnvironment);
+        if (ninjaProperties.isTest()) {
+
+            if (ApiProxy.getCurrentEnvironment() == null) {
+                ApiProxy.setEnvironmentForCurrentThread(new NinjaDevEnvironment());
+            }
+
         }
+
+        // not running on GAE => set the dev environment.
+        // if (ninjaDevEnvironment.)
+        // if (ApiProxy.getCurrentEnvironment() == null) {
+        // ApiProxy.setEnvironmentForCurrentThread(ninjaDevEnvironment);
+        // }
 
         return chain.next(context);
 

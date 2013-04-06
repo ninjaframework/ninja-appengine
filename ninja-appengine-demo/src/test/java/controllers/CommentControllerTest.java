@@ -27,6 +27,7 @@ import org.junit.Test;
 import com.google.common.collect.Maps;
 
 public class CommentControllerTest extends NinjaTest {
+    
 
     @Test
     public void testPostFormParsingWorks() {

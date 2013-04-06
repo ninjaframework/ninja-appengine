@@ -28,7 +28,6 @@ import com.google.appengine.tools.development.ApiProxyLocalFactory;
 import com.google.appengine.tools.development.LocalServerEnvironment;
 import com.google.apphosting.api.ApiProxy;
 import com.google.apphosting.api.ApiProxy.Environment;
-import com.google.inject.Singleton;
 
 /**
  * A simple Environment for developing GAE applications within Ninja.
@@ -36,7 +35,6 @@ import com.google.inject.Singleton;
  * @author ra
  *
  */
-@Singleton
 public class NinjaDevEnvironment implements Environment, LocalServerEnvironment {
 
 

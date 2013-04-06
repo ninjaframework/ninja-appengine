@@ -28,7 +28,7 @@
     </repositories>
     
     <properties>
-        <gae.version>1.7.4</gae.version>
+        <gae.version>1.7.6</gae.version>
     </properties>
 
     <dependencies>
@@ -62,46 +62,30 @@
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-stubs</artifactId>
             <version>${gae.version}</version>
+            <scope>provided</scope><!-- do not include in WEB-INF -->
         </dependency>
 
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-tools-sdk</artifactId>
             <version>${gae.version}</version>
+            <scope>provided</scope><!-- do not include in WEB-INF -->
         </dependency>
 
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-labs</artifactId>
             <version>${gae.version}</version>
+            <scope>provided</scope><!-- do not include in WEB-INF -->
         </dependency>
 
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-testing</artifactId>
             <version>${gae.version}</version>
+            <scope>provided</scope><!-- do not include in WEB-INF -->
         </dependency>
 
     </dependencies>
-
-
-    <build>
-
-        <plugins>
-            <plugin>
-                <groupId>net.kindleit</groupId>
-                <artifactId>maven-gae-plugin</artifactId>
-                <version>0.9.4</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.kindleit</groupId>
-                        <artifactId>gae-runtime</artifactId>
-                        <version>${gae.version}</version>
-                        <type>pom</type>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
-
+    
 </project>

@@ -1,22 +1,13 @@
-<!--
+<!-- Copyright (C) 2012 the original author or authors. Licensed under the 
+    Apache License, Version 2.0 (the "License"); you may not use this file except 
+    in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+    Unless required by applicable law or agreed to in writing, software distributed 
+    under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+    OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+    the specific language governing permissions and limitations under the License. -->
 
-    Copyright (C) 2012 the original author or authors.
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
--->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ninja-appengine-demo</artifactId>
@@ -30,7 +21,7 @@
     </parent>
 
     <properties>
-        <gae.version>1.7.4</gae.version>
+        <gae.version>1.7.6</gae.version>
     </properties>
 
 
@@ -48,6 +39,7 @@
                 <!-- Used to filter the dev mode into appengine-web.xml -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
                 <configuration>
                     <webResources>
                         <webResource>
@@ -55,11 +47,13 @@
                             <includes>
                                 <include>**/*</include>
                             </includes>
+                            
                             <targetPath>WEB-INF</targetPath>
                             <filtering>true</filtering>
                         </webResource>
                     </webResources>
                 </configuration>
+
             </plugin>
 
             <plugin>
@@ -74,21 +68,19 @@
             </plugin>
 
             <plugin>
-                <groupId>net.kindleit</groupId>
-                <artifactId>maven-gae-plugin</artifactId>
-                <version>0.9.4</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.kindleit</groupId>
-                        <artifactId>gae-runtime</artifactId>
-                        <version>${gae.version}</version>
-                        <type>pom</type>
-                    </dependency>
-                </dependencies>
+                <!-- It is not really recommended to use mvn appengine:devserver, 
+                    instead use jetty:run -->
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${gae.version}</version>
+                <configuration>
+                  <version>one</version>
+                </configuration>
             </plugin>
 
-
         </plugins>
+
+
 
         <resources>
             <resource>
@@ -134,21 +126,96 @@
 
 
     <profiles>
-        <!-- to filter appengine.xml and set correct mode on prod: -->
+        <!-- Two reasons why we have two profiles (one default profile and 
+            a deployment profile) -->
+        <!-- Reason 1) We have to filter appengine-web.xml to set the correct 
+            ninja.mode -->
+        <!-- Reason 2) We need the stubs to access the datastore and so on 
+            while developing and in the tests. -->
+        <!-- It is especially important that these dependencies do not get 
+            deployed in reality. -->
         <profile>
-            <id>default</id>
+            <id>default</id><!-- that's the ninja mode to filter in appengine-web.xml -->
             <properties>
+                <!-- that's the ninja mode to filter in appengine-web.xml -->
                 <ninja.mode>dev</ninja.mode>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+
+            <!-- Dependencies to make dev and test mode work nicely (not 
+                needed in production). -->
+            <dependencies>
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-stubs</artifactId>
+                    <version>${gae.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-tools-sdk</artifactId>
+                    <version>${gae.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-labs</artifactId>
+                    <version>${gae.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-testing</artifactId>
+                    <version>${gae.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+
         </profile>
         <profile>
             <id>deployment</id>
             <properties>
+                <!-- That's the Ninja mode to filter in appengine-web.xml -->
                 <ninja.mode>prod</ninja.mode>
             </properties>
+            <dependencies>
+            
+            
+                <!-- Dependencies to make test mode work nicely (not 
+                    needed in production). -->
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-stubs</artifactId>
+                    <version>${gae.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-tools-sdk</artifactId>
+                    <version>${gae.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-labs</artifactId>
+                    <version>${gae.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-testing</artifactId>
+                    <version>${gae.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 
