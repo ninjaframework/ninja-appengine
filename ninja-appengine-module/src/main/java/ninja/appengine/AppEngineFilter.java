@@ -70,12 +70,6 @@ public class AppEngineFilter implements Filter {
 
         }
 
-        // not running on GAE => set the dev environment.
-        // if (ninjaDevEnvironment.)
-        // if (ApiProxy.getCurrentEnvironment() == null) {
-        // ApiProxy.setEnvironmentForCurrentThread(ninjaDevEnvironment);
-        // }
-
         return chain.next(context);
 
     }
