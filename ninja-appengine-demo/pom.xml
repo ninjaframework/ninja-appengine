@@ -69,6 +69,7 @@
                     <contextPath>/</contextPath>
                     <scanIntervalSeconds>1</scanIntervalSeconds>
                     <reload>automatic</reload>
+                    
                 </configuration>
             </plugin>
 
@@ -80,6 +81,12 @@
                 <version>${gae.version}</version>
                 <configuration>
                   <version>two</version>
+                  <jvmFlags>
+                    <jvmFlag>-Xms512m</jvmFlag>
+                    <jvmFlag>-Xmx1024m</jvmFlag>
+                    <jvmFlag>-XX:PermSize=256m</jvmFlag>
+                    <jvmFlag>-XX:MaxPermSize=512m</jvmFlag>
+                  </jvmFlags>
                   
                 </configuration>
             </plugin>
