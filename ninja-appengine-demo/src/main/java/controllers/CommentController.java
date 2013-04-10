@@ -51,7 +51,7 @@ public class CommentController {
                               @Param("email") String email) {
         
         
-        System.out.println("isdev: " + ninjaProperties.isDev());
+        System.out.println("!: " + ninjaProperties.isDev());
         System.out.println("isprod: " + ninjaProperties.isProd());
 
         Objectify ofy = ObjectifyService.begin();

@@ -28,11 +28,11 @@
     </repositories>
     
     <properties>
-        <gae.version>1.7.6</gae.version>
+        <appengine.version>1.7.6</appengine.version>
     </properties>
 
     <dependencies>
-
+    
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-core</artifactId>
@@ -51,38 +51,45 @@
             <artifactId>objectify</artifactId>
             <version>3.1</version>
         </dependency>
+        
+                <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>${gae.version}</version>
+            <version>${appengine.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-stubs</artifactId>
-            <version>${gae.version}</version>
+            <version>${appengine.version}</version>
             <scope>provided</scope><!-- do not include in WEB-INF -->
         </dependency>
 
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-tools-sdk</artifactId>
-            <version>${gae.version}</version>
+            <version>${appengine.version}</version>
             <scope>provided</scope><!-- do not include in WEB-INF -->
         </dependency>
 
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-labs</artifactId>
-            <version>${gae.version}</version>
+            <version>${appengine.version}</version>
             <scope>provided</scope><!-- do not include in WEB-INF -->
         </dependency>
 
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-testing</artifactId>
-            <version>${gae.version}</version>
+            <version>${appengine.version}</version>
             <scope>provided</scope><!-- do not include in WEB-INF -->
         </dependency>
 

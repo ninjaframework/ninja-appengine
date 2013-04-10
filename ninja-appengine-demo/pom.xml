@@ -21,7 +21,8 @@
     </parent>
 
     <properties>
-        <gae.version>1.7.6</gae.version>
+        <appengine.version>1.7.6</appengine.version>
+        <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
     </properties>
 
 
@@ -36,9 +37,19 @@
         <!-- Default output dir, so that appengine devserver picks up changes: -->
         <!-- To trigger automatic restarts you have to touch appengine-web.xml -->
         <!-- More info here: http://stackoverflow.com/questions/800701/how-do-i-restart-the-google-app-engine-java-server-in-eclipse -->
-        <outputDirectory>target/${artifactId}-${version}/WEB-INF/classes</outputDirectory>
-    
+        <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
+
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <!-- Used to filter the dev mode into appengine-web.xml -->
@@ -52,7 +63,7 @@
                             <includes>
                                 <include>**/*</include>
                             </includes>
-                            
+
                             <targetPath>WEB-INF</targetPath>
                             <filtering>true</filtering>
                         </webResource>
@@ -69,8 +80,14 @@
                     <contextPath>/</contextPath>
                     <scanIntervalSeconds>1</scanIntervalSeconds>
                     <reload>automatic</reload>
-                    
+                    <systemProperties>
+                        <systemProperty>
+                            <name>appengine.generated.dir</name>
+                            <value>${appengine.generated.dir}</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
+
             </plugin>
 
             <plugin>
@@ -78,16 +95,17 @@
                     instead use jetty:run -->
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>${gae.version}</version>
+                <version>${appengine.version}</version>
                 <configuration>
-                  <version>two</version>
-                  <jvmFlags>
-                    <jvmFlag>-Xms512m</jvmFlag>
-                    <jvmFlag>-Xmx1024m</jvmFlag>
-                    <jvmFlag>-XX:PermSize=256m</jvmFlag>
-                    <jvmFlag>-XX:MaxPermSize=512m</jvmFlag>
-                  </jvmFlags>
-                  
+                    <version>two</version>
+                    <jvmFlags>
+                        <jvmFlag>-Xms512m</jvmFlag>
+                        <jvmFlag>-Xmx1024m</jvmFlag>
+                        <jvmFlag>-XX:PermSize=256m</jvmFlag>
+                        <jvmFlag>-XX:MaxPermSize=512m</jvmFlag>
+                    </jvmFlags>
+
+
                 </configuration>
             </plugin>
 
@@ -134,6 +152,36 @@
             <scope>provided</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-stubs</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-tools-sdk</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-testing</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 
@@ -148,7 +196,8 @@
         <!-- It is especially important that these dependencies do not get 
             deployed in reality. -->
         <profile>
-            <id>default</id><!-- that's the ninja mode to filter in appengine-web.xml -->
+            <id>appengine-dev</id><!-- that's the ninja mode to filter in 
+                appengine-web.xml -->
             <properties>
                 <!-- that's the ninja mode to filter in appengine-web.xml -->
                 <ninja.mode>dev</ninja.mode>
@@ -163,32 +212,75 @@
                 <dependency>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-api-stubs</artifactId>
-                    <version>${gae.version}</version>
+                    <version>${appengine.version}</version>
                     <scope>provided</scope>
                 </dependency>
 
                 <dependency>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-tools-sdk</artifactId>
-                    <version>${gae.version}</version>
+                    <version>${appengine.version}</version>
+                    <scope>provided</scope>
                 </dependency>
 
                 <dependency>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-api-labs</artifactId>
-                    <version>${gae.version}</version>
+                    <version>${appengine.version}</version>
                     <scope>provided</scope>
                 </dependency>
 
                 <dependency>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-testing</artifactId>
-                    <version>${gae.version}</version>
+                    <version>${appengine.version}</version>
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
 
         </profile>
+
+        <profile>
+            <id>jetty-dev</id><!-- that's the ninja mode to filter in appengine-web.xml -->
+            <properties>
+                <!-- that's the ninja mode to filter in appengine-web.xml -->
+                <ninja.mode>dev</ninja.mode>
+            </properties>
+
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <!-- Dependencies to make dev and test mode work nicely (not 
+                needed in production). -->
+            <dependencies>
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-stubs</artifactId>
+                    <version>${appengine.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-tools-sdk</artifactId>
+                    <version>${appengine.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-labs</artifactId>
+                    <version>${appengine.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-testing</artifactId>
+                    <version>${appengine.version}</version>
+                </dependency>
+            </dependencies>
+
+        </profile>
+
         <profile>
             <id>deployment</id>
             <properties>
@@ -196,35 +288,35 @@
                 <ninja.mode>prod</ninja.mode>
             </properties>
             <dependencies>
-            
-            
-                <!-- Dependencies to make test mode work nicely (not 
-                    needed in production). -->
+
+
+                <!-- Dependencies to make test mode work nicely (not needed 
+                    in production). -->
                 <dependency>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-api-stubs</artifactId>
-                    <version>${gae.version}</version>
+                    <version>${appengine.version}</version>
                     <scope>test</scope>
                 </dependency>
 
                 <dependency>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-tools-sdk</artifactId>
-                    <version>${gae.version}</version>
+                    <version>${appengine.version}</version>
                     <scope>test</scope>
                 </dependency>
 
                 <dependency>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-api-labs</artifactId>
-                    <version>${gae.version}</version>
+                    <version>${appengine.version}</version>
                     <scope>test</scope>
                 </dependency>
 
                 <dependency>
                     <groupId>com.google.appengine</groupId>
                     <artifactId>appengine-testing</artifactId>
-                    <version>${gae.version}</version>
+                    <version>${appengine.version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>

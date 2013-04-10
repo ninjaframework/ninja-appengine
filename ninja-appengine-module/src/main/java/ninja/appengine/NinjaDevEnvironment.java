@@ -17,12 +17,16 @@
 package ninja.appengine;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import ninja.utils.NinjaProperties;
 
 import org.apache.commons.lang.NotImplementedException;
 
 import com.google.appengine.api.datastore.dev.LocalDatastoreService;
+import com.google.appengine.repackaged.com.google.common.io.Files;
 import com.google.appengine.tools.development.ApiProxyLocal;
 import com.google.appengine.tools.development.ApiProxyLocalFactory;
 import com.google.appengine.tools.development.LocalServerEnvironment;
@@ -33,34 +37,62 @@ import com.google.apphosting.api.ApiProxy.Environment;
  * A simple Environment for developing GAE applications within Ninja.
  * 
  * @author ra
- *
+ * 
  */
 public class NinjaDevEnvironment implements Environment, LocalServerEnvironment {
 
-
-    public NinjaDevEnvironment() {
+    public NinjaDevEnvironment(NinjaProperties ninjaProperties) {
 
         // Create a fake development environment if not run in the Google SDK
 
-        if (ApiProxy.getCurrentEnvironment() == null) {
-            
+        System.out.println("No production App Engine environment found - starting local development environment");
 
-            System.out.println("No production App Engine environment found - starting local development environment");
+        ApiProxyLocalFactory factory = new ApiProxyLocalFactory();
+        ApiProxyLocal proxy = factory.create(this);
+        ApiProxy.setDelegate(proxy);
 
+        // If we are in test mode we do not persist data to disk
+        if (ninjaProperties.isTest()) {
 
-            ApiProxyLocalFactory factory = new ApiProxyLocalFactory();
-            ApiProxyLocal proxy = factory.create(this);
-            ApiProxy.setDelegate(proxy);
-            
-            File fileForLocalDataStoreService = new File("target/ninja-appengine/local_datastore_service");
-            System.out.println("Local datastore at: " + fileForLocalDataStoreService.getAbsolutePath());
+            System.out.println("In test mode - not saving Appengine data to disk");
+
+            proxy.setProperty(LocalDatastoreService.NO_STORAGE_PROPERTY,
+                    Boolean.toString(true));
+
+        } else {
+            // write to disk:
+
+            /**
+             * Set the property in your profile. It should match the appengine's
+             * output dir. You can use both jetty:run and appengine:deverserver
+             * - and both use the same db.
+             * 
+             */
+            String appengineGeneratedDir = System
+                    .getProperty("appengine.generated.dir");
+            // in tests we output stuff to target:
+            if (appengineGeneratedDir == null) {
+                appengineGeneratedDir = "target";
+            }
+
+            try {
+                Files.createParentDirs(new File(appengineGeneratedDir));
+            } catch (IOException e) {
+                // something strange happened. Can not create parent dirs...
+                e.printStackTrace();
+            }
+
+            System.out.println("Local datastore at: "
+                    + new File(appengineGeneratedDir + File.separator
+                            + "local_db.bin").getAbsolutePath());
 
             proxy.setProperty(LocalDatastoreService.BACKING_STORE_PROPERTY,
-                    fileForLocalDataStoreService.getAbsolutePath());
-
-            ApiProxy.setEnvironmentForCurrentThread(this);
+                    new File(appengineGeneratedDir + File.separator
+                            + "local_db.bin").getAbsolutePath());
 
         }
+
+        ApiProxy.setEnvironmentForCurrentThread(this);
 
     }
 

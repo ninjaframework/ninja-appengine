@@ -16,6 +16,8 @@
 
 package ninja.appengine;
 
+import javax.servlet.ServletContext;
+
 import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
@@ -50,8 +52,9 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class AppEngineFilter implements Filter {
+    
     NinjaProperties ninjaProperties;
-
+    
     @Inject
     public AppEngineFilter(NinjaProperties ninjaProperties) {
 
@@ -61,13 +64,9 @@ public class AppEngineFilter implements Filter {
 
     @Override
     public Result filter(FilterChain chain, Context context) {
-
-        if (ninjaProperties.isTest()) {
-
-            if (ApiProxy.getCurrentEnvironment() == null) {
-                ApiProxy.setEnvironmentForCurrentThread(new NinjaDevEnvironment());
-            }
-
+        
+        if (ApiProxy.getCurrentEnvironment() == null) {
+            ApiProxy.setEnvironmentForCurrentThread(new NinjaDevEnvironment(ninjaProperties));
         }
 
         return chain.next(context);
