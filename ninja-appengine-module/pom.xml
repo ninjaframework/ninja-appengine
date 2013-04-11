@@ -28,7 +28,7 @@
     </repositories>
     
     <properties>
-        <appengine.version>1.7.6</appengine.version>
+        <appengine.version>1.7.7</appengine.version>
     </properties>
 
     <dependencies>

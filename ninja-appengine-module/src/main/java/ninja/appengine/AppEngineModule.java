@@ -16,7 +16,10 @@
 
 package ninja.appengine;
 
+import ninja.utils.NinjaProperties;
+
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 /**
@@ -30,7 +33,25 @@ import com.google.inject.Singleton;
 public class AppEngineModule extends AbstractModule {
 
     protected void configure() {
-        bind(NinjaDevEnvironment.class).in(Singleton.class);
+        //bind(NinjaAppengineEnvironmentImpl.class).in(Singleton.class);
     }
+    
+//    @Provides
+//    @Singleton
+//    NinjaAppengineEnvironment getNinjaAppengineEnvironment(NinjaProperties ninjaProperties) {
+//        
+//        if (ninjaProperties.isProd()) {
+//            
+//            return new NinjaAppengineEnvironmentNull();
+//            
+//        } else {
+//            return new NinjaAppengineEnvironmentImpl(ninjaProperties); 
+//        }
+//        
+//    }
+    
+    
+    
+    
 
 }

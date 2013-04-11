@@ -16,15 +16,11 @@
 
 package ninja.appengine;
 
-import javax.servlet.ServletContext;
-
 import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
-import ninja.utils.NinjaProperties;
 
-import com.google.apphosting.api.ApiProxy;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -53,21 +49,22 @@ import com.google.inject.Singleton;
 @Singleton
 public class AppEngineFilter implements Filter {
     
-    NinjaProperties ninjaProperties;
+    NinjaAppengineEnvironment ninjaAppengineEnvironment;
     
     @Inject
-    public AppEngineFilter(NinjaProperties ninjaProperties) {
+    public AppEngineFilter(NinjaAppengineEnvironment ninjaAppengineEnvironment) {
 
-        this.ninjaProperties = ninjaProperties;
+        this.ninjaAppengineEnvironment = ninjaAppengineEnvironment;
 
     }
 
     @Override
     public Result filter(FilterChain chain, Context context) {
         
-        if (ApiProxy.getCurrentEnvironment() == null) {
-            ApiProxy.setEnvironmentForCurrentThread(new NinjaDevEnvironment(ninjaProperties));
-        }
+        // Inits the dev environment for this thread or skips the init
+        // There is some runtime overhead involved here. But if you are on production
+        // the overhead is really small - have a look at the NinjaAppengineEnvironmentProvider
+        ninjaAppengineEnvironment.initOrSkip();
 
         return chain.next(context);
 

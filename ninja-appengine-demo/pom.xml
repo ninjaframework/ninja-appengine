@@ -21,7 +21,7 @@
     </parent>
 
     <properties>
-        <appengine.version>1.7.6</appengine.version>
+        <appengine.version>1.7.7</appengine.version>
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
     </properties>
 
@@ -95,7 +95,7 @@
                     instead use jetty:run -->
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>${appengine.version}</version>
+                <version>1.7.6</version>
                 <configuration>
                     <version>two</version>
                     <jvmFlags>

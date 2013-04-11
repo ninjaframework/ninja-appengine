@@ -24,7 +24,7 @@ import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
-import ninja.appengine.NinjaDevEnvironment;
+import ninja.appengine.NinjaAppengineEnvironmentImpl;
 import ninja.params.Param;
 import ninja.utils.NinjaProperties;
 

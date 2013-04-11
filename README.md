@@ -27,7 +27,7 @@ Usage
 =====
 
 Usage is straight forward. The most important thing you have to keep in mind is to annotate 
-your Controllers with
+your controllers with
 
     @FilterWith(AppEngineFilter.class
     public class MyController {
@@ -35,7 +35,7 @@ your Controllers with
     }
     
 This is needed to setup the dev environment. If you forget this you'll get a lot
-of strange error messages.
+of strange error messages especially in tests.
     
 When using persistence you have to register your objectify models vial:
 
@@ -63,7 +63,50 @@ Deployment
 
 Is as easy as:
 
-    mvn clean install gae:deploy -Pdeployment
+    mvn clean appengine:update -Pdeployment
+    
+    
+Starting
+========
+
+Starting the dev environment can be done in two ways:
+
+1. You can use jetty running
+
+    mvn jetty:run -Pjetty-dev 
+    (automatially picks up changes, but does not provide built in admin tools)
+    
+2. You can also use the devserver of GAE
+
+   mvn appengine:devserver -Pappengine-dev 
+   (built-in admin tools, but setting up productive reloading requires one more step)
+
+   
+Hint: If you are using the devserver it makes a lot of sense to automatically touch appengine-web.xml
+so that the dev server restarts and picks up your changes. The idea comes from Miguel Vitorino at
+ http://stackoverflow.com/questions/800701/how-do-i-restart-the-google-app-engine-java-server-in-eclipse
+
+Go to you project properties, Builders and add a new build step as a "Program". 
+Under "Location" enter the path to your "touch" command 
+("D:\bin\UnxUtils\usr\local\wbin\touch.exe" for example - on Posix systems just 
+"touch" should be enough since it's already in your PATH) and in "Arguments" put something 
+like "${project_loc}/war/WEB-INF/appengine-web.xml". Also go to the "Build Options" 
+tab and check "During auto builds".
+
+"touch" will update the timestamp in your appengine-web.xml. 
+When the App Engine server detects changes to you appengine-web.xml it will 
+reload the app automatically. The load process is very fast so it can be done whenever you 
+change any file in your project (which normally triggers the auto-build in Eclipse) - 
+you can tweak the builder to only run when you change certain types of files.
+
+
+
+Testing
+=======
+
+When your tests extend NinjaTest you can just start right away. Initialization of
+the test env is done via the filter you used for your controllers. The tests use
+an in-memory implementation of the datastore.
 
 
 Basic Setup
@@ -86,34 +129,23 @@ pom.xml
     <dependency>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine-module</artifactId>
-        <version>1.0.1</version>
+        <version>1.1</version>
     </dependency>
 
 
 2) Add profiles for production / development to your pom:
 
-These profiles will allow you to correctly set the ninja mode for test and 
-development:
+The easiest way is to go to
 
-    <profiles>
-        <profile>
-            <id>default</id>
-            <properties>
-                <ninja.mode>dev</ninja.mode>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>deployment</id>
-            <properties>
-                <ninja.mode>prod</ninja.mode>
-            </properties>
-        </profile>
-    </profiles>
+    https://github.com/reyez/ninja-appengine/blob/master/ninja-appengine-demo/pom.xml
+    
+and copy the relevant parts to your project. In short you have to:
 
-3) Filter the resources to finally set the mode dev / production:
+- Have profiles for deployment, appengine-dev and jetty-dev.
+- Configure the appengine libraries with the correct scopes
+- Set the build output dir consistently
+
+It is also important to filter the resources to finally set the mode dev / production:
 
     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
