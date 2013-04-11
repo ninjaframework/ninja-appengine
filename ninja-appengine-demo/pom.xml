@@ -95,7 +95,7 @@
                     instead use jetty:run -->
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>1.7.6</version>
+                <version>${appengine.version}</version>
                 <configuration>
                     <version>two</version>
                     <jvmFlags>
