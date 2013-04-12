@@ -20,33 +20,17 @@ import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
-import ninja.postoffice.Mail;
-import ninja.postoffice.Postoffice;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
+@Singleton
 @FilterWith(AppEngineFilter.class)
-public class MailDemoController {
-    
-    @Inject 
-    Provider<Mail> mailProvider;
-    
-    @Inject 
-    Postoffice postoffice;
+public class IndexController {
 
-    public Result mail() throws Exception {
-        Mail mail = mailProvider.get();
-        
-        mail.setFrom("me@test.com");
-        mail.setBodyText("textText");
-        mail.addTo("to@example.com");
+    public Result index() {;
 
-        postoffice.send(mail);       
-        
         return Results.html();
-        
+
     }
 
-    
 }

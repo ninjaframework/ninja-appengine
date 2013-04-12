@@ -16,6 +16,8 @@
 
 package conf;
 
+import ninja.appengine.AppEngineModule;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 
@@ -27,7 +29,7 @@ public class Module extends AbstractModule {
 
         bind(Objectify.class);
         
-        //install(AppEngineModule.class);
+        install(new AppEngineModule());
     }
 
 }

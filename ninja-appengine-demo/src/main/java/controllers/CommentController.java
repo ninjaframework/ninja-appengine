@@ -24,10 +24,11 @@ import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
-import ninja.appengine.NinjaDevEnvironment;
+import ninja.appengine.NinjaAppengineEnvironmentImpl;
 import ninja.params.Param;
+import ninja.utils.NinjaProperties;
 
-import com.google.appengine.repackaged.com.google.common.collect.Lists;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -40,22 +41,24 @@ import com.googlecode.objectify.Query;
 public class CommentController {
 
     //private final LocalServiceTestHelper helper;
-
+    
     @Inject
-    public CommentController(NinjaDevEnvironment ninjaDevEnvironment) {
+    NinjaProperties ninjaProperties;
 
-        
-    }
 
     public Result postComment(Context context,
                               @Param("text") String text,
                               @Param("email") String email) {
+        
+        
+        System.out.println("!: " + ninjaProperties.isDev());
+        System.out.println("isprod: " + ninjaProperties.isProd());
 
         Objectify ofy = ObjectifyService.begin();
 
         Comment comment = new Comment();
 
-        comment.text = text;
+        comment.text = text + "-isdev: "+ ninjaProperties.isDev() + " -- isProd " + ninjaProperties.isProd();
         comment.email = email;
         ofy.put(comment);
 

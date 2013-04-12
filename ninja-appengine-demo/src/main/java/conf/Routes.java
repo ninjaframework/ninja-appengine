@@ -20,6 +20,7 @@ import ninja.AssetsController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import controllers.CommentController;
+import controllers.IndexController;
 import controllers.MailDemoController;
 
 public class Routes implements ApplicationRoutes {
@@ -34,17 +35,16 @@ public class Routes implements ApplicationRoutes {
      *            The default router of this application
      */
     @Override
-    public void init(Router router) {
+    public void init(Router router) {  
         
-        router.GET().route("/mail")
-        .with(MailDemoController.class, "mail");
+        router.GET().route("/mail").with(MailDemoController.class, "mail");
 
-        router.GET().route("/comments")
-                .with(CommentController.class, "listComments");
-        router.POST().route("/comment")
-                .with(CommentController.class, "postComment");
+        router.GET().route("/comments").with(CommentController.class, "listComments");
+        router.POST().route("/comment").with(CommentController.class, "postComment");
 
         router.GET().route("/assets/.*").with(AssetsController.class, "serve");
+        
+        router.GET().route("/.*").with(IndexController.class, "index");
     }
 
 }
