@@ -15,7 +15,7 @@ public class NinjaAppengineEnvironmentNull implements NinjaAppengineEnvironment 
     
     public NinjaAppengineEnvironmentNull() {
         
-        System.out.println("Starting NinjaAppengineEnvironment in production.");
+        System.out.println("Loading NinjaAppengineEnvironmentNull (for devserver and production).");
         
     }
 
