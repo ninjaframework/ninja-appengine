@@ -70,16 +70,16 @@ Starting
 ========
 
 Starting the dev environment can be done in two ways:
-
-1. You can use jetty running
-
-    mvn jetty:run -Pjetty-dev 
-    (automatially picks up changes, but does not provide built in admin tools)
     
-2. You can also use the devserver of GAE
+- You can use the devserver of GAE (RECOMMENDED)
 
    mvn appengine:devserver -Pappengine-dev 
    (built-in admin tools, but setting up productive reloading requires one more step)
+   
+- You can use jetty to run your app:
+
+    mvn jetty:run -Pjetty-dev 
+    (automatially picks up changes, but does not provide built in admin tools)
 
    
 Hint: If you are using the devserver it makes a lot of sense to automatically touch appengine-web.xml
