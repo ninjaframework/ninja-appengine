@@ -15,7 +15,7 @@ import com.googlecode.objectify.ObjectifyService;
 public class OfyService {
     
     static {
-        ObjectifyService.register(Comment.class);
+        factory().register(Comment.class);
     }
 
     public static Objectify ofy() {

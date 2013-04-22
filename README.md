@@ -37,24 +37,28 @@ your controllers with
 This is needed to setup the dev environment. If you forget this you'll get a lot
 of strange error messages especially in tests.
     
-When using persistence you have to register your objectify models vial:
+When using persistence you have to register your objectify models via an OfyService.
+Please refer to https://code.google.com/p/objectify-appengine/wiki/BestPractices OfyService.
+The OfyService will look roughly like the following class.
+We usually put the class under conf.OfyService.
 
-    @Singleton
-    public class Objectify {
 
-    @Start(order=10)
-    public void registerModels() {
-        
-            ObjectifyService.register(MyModel.class);
-        
+    public class OfyService {
+        static {
+            factory().register(Thing.class);
+            factory().register(OtherThing.class);
+            ...etc
         }
 
-    }   
-    
-Also don't forget to bind the singleton in your conf.Module:
-    bind(Objectify.class);
-    
-    
+        public static Objectify ofy() {
+            return ObjectifyService.ofy();
+        }
+
+        public static ObjectifyFactory factory() {
+            return ObjectifyService.factory();
+        }
+    }
+        
 More about Objectify: https://code.google.com/p/objectify-appengine/
 
 
