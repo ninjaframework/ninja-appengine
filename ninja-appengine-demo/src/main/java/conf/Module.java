@@ -26,8 +26,6 @@ public class Module extends AbstractModule {
     
 
     protected void configure() {
-
-        bind(Objectify.class);
         
         install(new AppEngineModule());
     }

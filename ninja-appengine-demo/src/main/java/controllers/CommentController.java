@@ -16,6 +16,7 @@
 
 package controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import models.Comment;
@@ -24,17 +25,15 @@ import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
-import ninja.appengine.NinjaAppengineEnvironmentImpl;
 import ninja.params.Param;
 import ninja.utils.NinjaProperties;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Query;
+
+import conf.OfyService;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
@@ -52,13 +51,13 @@ public class CommentController {
         
         
 
-        Objectify ofy = ObjectifyService.begin();
+        Objectify ofy = OfyService.ofy();
 
         Comment comment = new Comment();
 
         comment.text = text + "-isdev: "+ ninjaProperties.isDev() + " -- isProd " + ninjaProperties.isProd();
         comment.email = email;
-        ofy.put(comment);
+        ofy.save().entity(comment).now();
 
         return Results.redirect("/comments");
 
@@ -66,18 +65,12 @@ public class CommentController {
 
     public Result listComments(Context context) {
 
-        Objectify ofy = ObjectifyService.begin();
+        Objectify ofy = OfyService.ofy();
 
-        Query<Comment> q = ofy.query(Comment.class);
+        List<Comment> comments = ofy.load().type(Comment.class).list();
 
         Map<String, Object> map = Maps.newHashMap();
 
-        java.util.List<Comment> comments = Lists.newArrayList();
-        for (Comment com : q) {
-
-            comments.add(com);
-
-        }
         map.put("comments", comments);
 
         return Results.html().render(map);

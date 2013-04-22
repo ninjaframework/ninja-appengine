@@ -16,8 +16,11 @@
 
 package models;
 
-import javax.persistence.Id;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 
+
+@Entity
 public class Comment {
 	
     @Id Long id; // Can be Long, long, or String

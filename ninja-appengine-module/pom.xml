@@ -20,13 +20,6 @@
         <version>1.4-SNAPSHOT</version>
     </parent>
     
-        <repositories>
-        <repository>
-            <id>objectify-appengine</id>
-            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
-        </repository>
-    </repositories>
-    
     <properties>
         <appengine.version>1.7.7</appengine.version>
     </properties>
@@ -49,7 +42,7 @@
         <dependency>
             <groupId>com.googlecode.objectify</groupId>
             <artifactId>objectify</artifactId>
-            <version>3.1</version>
+            <version>4.0b2</version>
         </dependency>
         
         <dependency>
