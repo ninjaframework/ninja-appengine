@@ -16,11 +16,7 @@
 
 package ninja.appengine;
 
-import ninja.utils.NinjaProperties;
-
 import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
 
 /**
  * use it in your applications module like:

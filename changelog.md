@@ -3,6 +3,7 @@ LATEST
 
  * Bump to Objectify 4.02b
  * Update of demo project to use OfyService
+ * Simplified AppEngineEnvironment => now using localtesthelper for jetty and tests
 
 1.3
 ===
