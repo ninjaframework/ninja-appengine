@@ -86,22 +86,23 @@ public class NinjaAppengineEnvironmentImpl implements NinjaAppengineEnvironment{
                 if (appengineGeneratedDir == null) {
                     appengineGeneratedDir = "target";
                 }
+                
+                // add all relative path information to the dir
+                String fullAppengineGeneratedDirWithLocalDbFile = new File(appengineGeneratedDir + File.separator
+                        + "local_db.bin").getAbsolutePath();
 
                 try {
-                    Files.createParentDirs(new File(appengineGeneratedDir));
+                    Files.createParentDirs(new File(fullAppengineGeneratedDirWithLocalDbFile));
                 } catch (IOException e) {
                     // something strange happened. Can not create parent dirs...
                     e.printStackTrace();
                 }
 
-                System.out.println("Local datastore at: "
-                        + new File(appengineGeneratedDir + File.separator
-                                + "local_db.bin").getAbsolutePath());
+                System.out.println("Local datastore at: " + fullAppengineGeneratedDirWithLocalDbFile);
                 
                 LocalServiceTestHelper helper = new LocalServiceTestHelper(
                         new LocalDatastoreServiceTestConfig().setBackingStoreLocation(
-                                appengineGeneratedDir + File.separator
-                                + "local_db.bin"));
+                                fullAppengineGeneratedDirWithLocalDbFile).setNoStorage(false));
         
                 helper.setUp();
 
