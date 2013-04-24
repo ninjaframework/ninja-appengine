@@ -1,9 +1,15 @@
-LATEST
-======
+1.5.1
+=====
+
+ * Added ObjectifyFilter to ServletModule in demo app 
+ 
+1.5
+===
 
  * Bump to Objectify 4.02b
  * Update of demo project to use OfyService
  * Removed a bug where multiple datastores were loaded per running app
+
 
 1.3
 ===

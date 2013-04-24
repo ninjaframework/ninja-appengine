@@ -3,6 +3,8 @@ package conf;
 import ninja.servlet.NinjaServletDispatcher;
 
 import com.google.appengine.api.utils.SystemProperty;
+import com.google.inject.Singleton;
+import com.googlecode.objectify.ObjectifyFilter;
 
 public class ServletModule extends com.google.inject.servlet.ServletModule {
 
@@ -11,6 +13,13 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 
         bind(NinjaServletDispatcher.class).asEagerSingleton();
 
+        
+        // We need the objectify filter to clean up Ofys and threads after
+        // each request:
+        bind(ObjectifyFilter.class).in(Singleton.class);
+        filter("/*").through(ObjectifyFilter.class);
+        
+        
 
         if (SystemProperty.environment.value() ==
                 SystemProperty.Environment.Value.Production) {
