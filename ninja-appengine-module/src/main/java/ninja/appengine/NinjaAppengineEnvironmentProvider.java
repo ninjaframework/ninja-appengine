@@ -4,6 +4,7 @@ import ninja.utils.NinjaProperties;
 
 import com.google.apphosting.api.ApiProxy;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
@@ -20,25 +21,32 @@ import com.google.inject.Singleton;
 public class NinjaAppengineEnvironmentProvider implements Provider<NinjaAppengineEnvironment> {
     
     private NinjaProperties ninjaProperties;
+    
+    private NinjaAppengineEnvironment ninjaAppengineEnvironment;
+    
+    
 
     @Inject
-    public NinjaAppengineEnvironmentProvider(NinjaProperties ninjaProperties) {
+    public NinjaAppengineEnvironmentProvider(Injector injector, NinjaProperties ninjaProperties) {
         this.ninjaProperties = ninjaProperties;
+                
+        // make sure we return null when we are in production
+        // or the environment is already registered (will be the case in appengine:devserver mode
+        if (ninjaProperties.isProd() || ApiProxy.getCurrentEnvironment() != null) {
+            
+            ninjaAppengineEnvironment = injector.getInstance(NinjaAppengineEnvironmentNull.class);
+            
+        } else {
+            ninjaAppengineEnvironment = injector.getInstance(NinjaAppengineEnvironmentImpl.class); 
+        }
         
     }
 
     @Override
     public NinjaAppengineEnvironment get() {        
         
-        // make sure we return null when we are in production
-        // or the environment is already registered (will be the case in appengine:devserver mode
-        if (ninjaProperties.isProd() || ApiProxy.getCurrentEnvironment() != null) {
-            
-            return new NinjaAppengineEnvironmentNull();
-            
-        } else {
-            return new NinjaAppengineEnvironmentImpl(ninjaProperties); 
-        }
+        return ninjaAppengineEnvironment;
+
 
     }
 

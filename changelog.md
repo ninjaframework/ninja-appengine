@@ -3,7 +3,7 @@ LATEST
 
  * Bump to Objectify 4.02b
  * Update of demo project to use OfyService
- * Simplified AppEngineEnvironment => now using localtesthelper for jetty and tests
+ * Removed a bug where multiple datastores were loaded per running app
 
 1.3
 ===
