@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="ninja-appengine-blog"
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <fileSets>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/java</directory>
+      <includes>
+        <include>**/*.html</include>
+        <include>**/*.java</include>
+        <include>**/*.properties</include>
+        <include>**/*.txt</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>src/main/java</directory>
+      <includes>
+        <include>**/*.dxf</include>
+        <include>**/*.woff</include>
+        <include>**/*.dxf#</include>
+        <include>**/*.svg</include>
+        <include>**/*.ttf</include>
+        <include>**/*.js</include>
+        <include>**/*.ico</include>
+        <include>**/*.conf</include>
+        <include>**/*.swf</include>
+        <include>**/*.jpg</include>
+        <include>**/*.eot</include>
+        <include>**/*.png</include>
+        <include>**/*.md</include>
+        <include>**/*.css</include>
+        <include>**/*.gif</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/webapp</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/test/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>.externalToolBuilders</directory>
+      <includes>
+        <include>**/*.launch</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>.settings</directory>
+      <includes>
+        <include>**/*.prefs</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>.classpath</include>
+        <include>.project</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>

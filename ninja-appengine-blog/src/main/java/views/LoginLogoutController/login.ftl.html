@@ -1,0 +1,17 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> <@layout.myLayout "Home page">
+
+<form action="/login" method="post">
+	<p>
+		<label for="username">Username / Email: </label> <input type="text"
+			name="username" id="username" value="${(flash_username)!""}"/>
+	</p>
+	<p>
+		<label for="password">Your message: </label> <input type="password"
+			name="password" id="password" value="${(flash_password)!""}"/>
+	</p>
+	<p>
+		<input type="submit" value="Login" />
+	</p>
+</form>
+
+</@layout.myLayout>

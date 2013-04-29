@@ -35,8 +35,10 @@
 	</parent>
 
 	<modules>
-		<module>ninja-appengine-demo</module>
         <module>ninja-appengine-module</module>
+		<module>ninja-appengine-demo</module>
+        <module>ninja-appengine-blog</module>
+        <module>ninja-appengine-blog-archetype</module>        
 	</modules>
 
 	<!-- pin encoding to utf-8 -->
@@ -60,8 +62,19 @@
 						<target>1.6</target>
 					</configuration>
 				</plugin>
-
-			</plugins>
+                
+                <!-- We recreate the VM used for testing each time -->
+                <!-- The in memory simulation of the GAE datastore does not like parallel execution -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.14.1</version>
+                    <configuration>
+                        <reuseForks>false</reuseForks>
+                        <forkCount>1</forkCount>
+                    </configuration>
+                </plugin>
+			 </plugins>
 		</pluginManagement>
 	</build>
 
