@@ -11,7 +11,7 @@
     <groupId>org.ninjaframework</groupId>
     <artifactId>ninja-appengine-blog</artifactId>
     <packaging>war</packaging>
-    <version>1.5.1</version>
+    <version>1.5.2-SNAPSHOT</version>
     <name>How to build a blog with Ninja at the Appengine</name>
 
     <properties>
@@ -156,7 +156,7 @@
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-appengine-module</artifactId>
-            <version>1.5.1</version>
+            <version>1.5.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
