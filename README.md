@@ -62,6 +62,17 @@ We usually put the class under conf.OfyService.
 More about Objectify: https://code.google.com/p/objectify-appengine/
 
 
+Quick start
+===========
+
+Generate a Ninja appengine archetype by calling the follwing command:
+
+    mvn archetype:generate -DarchetypeGroupId=org.ninjaframework -DarchetypeArtifactId=ninja-appengine-blog-archetype
+
+This will generate a full archetype showing a simple blog complete with Objectify as 
+persistence layer. A nice archetype for your own projects...
+
+
 Deployment
 ==========
 
@@ -111,6 +122,10 @@ Testing
 When your tests extend NinjaTest you can just start right away. Initialization of
 the test env is done via the filter you used for your controllers. The tests use
 an in-memory implementation of the datastore.
+
+
+
+
 
 
 Basic Setup
