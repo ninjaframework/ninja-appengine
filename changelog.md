@@ -2,6 +2,8 @@
 =====
 
  * Added ObjectifyFilter to ServletModule in demo app 
+ * Added appengine-blog demo project
+ * Added archetype that creates an appengine-blog for quick start of projects
  
 1.5
 ===
