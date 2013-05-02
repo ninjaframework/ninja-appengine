@@ -22,7 +22,7 @@
 	<groupId>org.ninjaframework</groupId>
 	<artifactId>ninja-appengine</artifactId>
 	<packaging>pom</packaging>
-	<version>1.5.3</version>
+	<version>1.5.4-SNAPSHOT</version>
 	<name>Google App Engine support for Ninja Framework</name>
 	<url>http://www.ninjaframework.org</url>
 
