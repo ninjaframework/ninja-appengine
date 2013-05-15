@@ -16,11 +16,10 @@
     <parent>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine</artifactId>
-        <version>1.5.6-SNAPSHOT</version>
+        <version>1.6</version>
     </parent>
 
     <properties>
-        <appengine.version>1.7.7</appengine.version>
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
     </properties>
 
@@ -39,16 +38,6 @@
         <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
 
         <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <!-- Used to filter the dev mode into appengine-web.xml -->
@@ -126,6 +115,9 @@
                 <includes>
                     <include>**/*</include>
                 </includes>
+                <excludes>
+                    <exclude>**/*.class</exclude>
+                </excludes>
             </resource>
         </resources>
 
@@ -149,7 +141,7 @@
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-appengine-module</artifactId>
-            <version>1.5.6-SNAPSHOT</version>
+            <version>1.6</version>
         </dependency>
 
         <dependency>

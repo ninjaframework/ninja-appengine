@@ -17,12 +17,8 @@
     <parent>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine</artifactId>
-        <version>1.5.6-SNAPSHOT</version>
+        <version>1.6</version>
     </parent>
-    
-    <properties>
-        <appengine.version>1.7.7</appengine.version>
-    </properties>
 
     <dependencies>
     

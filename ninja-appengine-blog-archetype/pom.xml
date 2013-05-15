@@ -3,13 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>ninja-appengine-blog-archetype</artifactId>
-  <version>1.5.6-SNAPSHOT</version>
   <packaging>maven-archetype</packaging>
     
     <parent>
         <groupId>org.ninjaframework</groupId>
 		<artifactId>ninja-appengine</artifactId>
-		<version>1.5.6-SNAPSHOT</version>
+		<version>1.6</version>
 	</parent>
 
   <name>ninja-appengine-blog-archetype</name>
