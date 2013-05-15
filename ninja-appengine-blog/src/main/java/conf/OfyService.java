@@ -1,6 +1,5 @@
 package conf;
 
-import models.Comment;
 import models.Article;
 import models.User;
 
@@ -18,7 +17,6 @@ public class OfyService {
     static {
         ObjectifyService.register(User.class);
         ObjectifyService.register(Article.class);
-        ObjectifyService.register(Comment.class);
         
         setup();
     }
@@ -58,10 +56,6 @@ public class OfyService {
             // Create a new post
             Article bobPost3 = new Article(bob, "My third post", lipsum);
             ofy.save().entity(bobPost3);
-
-            // Post a first comment
-            bobPost.addComment("Jeff", "Nice post");
-            bobPost.addComment("Tom", "I knew that !");
 
         }
         
