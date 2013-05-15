@@ -32,7 +32,7 @@ import org.junit.Test;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
-public class ApiControllerTest extends NinjaTest {
+public class ApiControllerTest extends NinjaAppengineTest {
 
     @Test
     public void testGetAndPostArticle() throws Exception {

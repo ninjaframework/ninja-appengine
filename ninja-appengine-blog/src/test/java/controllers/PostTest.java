@@ -50,37 +50,4 @@ public class PostTest extends NinjaAppengineBackendTest {
         assertNotNull(firstPost.postedAt);
     }
     
-    
-    @Test
-    public void testUseTheCommentsRelation() {
-        
-        
-
-        
-        Objectify ofy = OfyService.ofy();  
-        
-        
-        // Create a new user and save it
-        User bob = new User("bob@gmail.com", "secret", "Bob");
-        ofy.save().entity(bob).now();
-     
-        // Create a new post
-        Article bobPost = new Article(bob, "My first post", "Hello world");
-        ofy.save().entity(bobPost).now();
-     
-     
-        // Count things
-        assertEquals(1, ofy.load().type(User.class).list().size());
-        assertEquals(1, ofy.load().type(Article.class).list().size());
-     
-        // Retrieve Bob's post
-        bobPost = ofy.load().type(Article.class).filter("authorIds", bob.id).first().get();
-        assertNotNull(bobPost);
-
-        
-        // Check that all comments have been deleted
-        assertEquals(1, ofy.load().type(User.class).list().size());
-        assertEquals(1, ofy.load().type(Article.class).list().size());
-    }
-
 }

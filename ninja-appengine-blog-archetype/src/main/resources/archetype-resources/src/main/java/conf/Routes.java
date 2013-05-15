@@ -39,7 +39,10 @@ public class Routes implements ApplicationRoutes {
      *            The default router of this application
      */
     @Override
-    public void init(Router router) {  
+    public void init(Router router) { 
+        
+        // puts test data into db:
+        router.GET().route("/setup").with(ApplicationController.class, "setup");
         
         ///////////////////////////////////////////////////////////////////////
         // Login / Logout

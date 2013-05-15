@@ -20,13 +20,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
-import ninja.NinjaTest;
-
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
 
-public class ApplicationControllerTest extends NinjaTest {
+public class ApplicationControllerTest extends NinjaAppengineTest {
 
     @Test
     public void testThatHomepageWorks() {
@@ -36,12 +34,13 @@ public class ApplicationControllerTest extends NinjaTest {
 
         // /redirect will send a location: redirect in the headers
         String result = ninjaTestBrowser.makeRequest(getServerAddress() + "/", headers);
+        
+        System.out.println("result: " + result);
 
         // If the redirect has worked we must see the following text
         // from the index screen:
         assertTrue(result.contains("My first post"));
         assertTrue(result.contains("My second post"));
-        assertTrue(result.contains("My third post"));
 
     }
 

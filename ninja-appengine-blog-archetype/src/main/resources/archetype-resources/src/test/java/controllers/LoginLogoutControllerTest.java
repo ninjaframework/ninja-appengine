@@ -29,7 +29,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Maps;
 
-public class LoginLogoutControllerTest extends NinjaTest {
+public class LoginLogoutControllerTest extends NinjaAppengineTest {
 
     @Test
     public void testLogingLogout() {

@@ -1,3 +1,11 @@
+1.6.0
+=====
+
+ * Bump to Appengine plugin and version 1.8.0
+ * Class files no longer included as source
+ * Switch to java7 as default
+ 
+
 1.5.2
 =====
 

@@ -5,6 +5,9 @@ import org.junit.Before;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.googlecode.objectify.ObjectifyFilter;
+
+import conf.OfyService;
 
 public class NinjaAppengineBackendTest {
 
@@ -14,11 +17,14 @@ public class NinjaAppengineBackendTest {
     @Before
     public void setUp() {
         helper.setUp();
+        OfyService.setup();
     }
 
     @After
     public void tearDown() {
+        
         helper.tearDown();
+        ObjectifyFilter.complete();
     }
 
 }

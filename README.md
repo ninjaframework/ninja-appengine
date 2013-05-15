@@ -18,16 +18,16 @@ Google App Engine support for Ninja
 This module allows to use Ninja on the GAE easily.
 
 In particular it uses:
-- Objectify to store data (in dev and test mode).
+- Objectify to store data,
 - The default Mailer.
-- The rest is absolutely standard Ninja.
+- Everything else is absolutely standard Ninja.
 
 
 Usage
 =====
 
 Usage is straight forward. The most important thing you have to keep in mind is to annotate 
-your controllers with
+your controller classes with
 
     @FilterWith(AppEngineFilter.class
     public class MyController {
@@ -70,7 +70,7 @@ Generate a Ninja appengine archetype by calling the follwing command:
     mvn archetype:generate -DarchetypeGroupId=org.ninjaframework -DarchetypeArtifactId=ninja-appengine-blog-archetype
 
 This will generate a full archetype showing a simple blog complete with Objectify as 
-persistence layer. A nice archetype for your own projects...
+persistence layer. A nice archetype to start your own projects...
 
 
 Deployment
@@ -98,8 +98,9 @@ Starting the dev environment can be done in two ways:
 
    
 Hint: If you are using the devserver it makes a lot of sense to automatically touch appengine-web.xml
-so that the dev server restarts and picks up your changes. The idea comes from Miguel Vitorino at
- http://stackoverflow.com/questions/800701/how-do-i-restart-the-google-app-engine-java-server-in-eclipse
+when you change your code. This causes the dev server tor restart and pick up your changes. 
+The idea comes from Miguel Vitorino at
+http://stackoverflow.com/questions/800701/how-do-i-restart-the-google-app-engine-java-server-in-eclipse
 
 Go to you project properties, Builders and add a new build step as a "Program". 
 Under "Location" enter the path to your "touch" command 
@@ -124,10 +125,6 @@ the test env is done via the filter you used for your controllers. The tests use
 an in-memory implementation of the datastore.
 
 
-
-
-
-
 Basic Setup
 ===========
 
@@ -140,6 +137,7 @@ The demo application show best how to setup
 - application.conf
 - appengine-web.xml
 
+
 pom.xml
 -------
 
@@ -148,7 +146,7 @@ pom.xml
     <dependency>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine-module</artifactId>
-        <version>1.1</version>
+        <version>1.6</version>
     </dependency>
 
 

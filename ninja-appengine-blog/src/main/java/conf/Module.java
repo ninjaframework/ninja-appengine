@@ -27,7 +27,8 @@ public class Module extends AbstractModule {
 
     protected void configure() {
         
-        install(new AppEngineModule());
+        install(new AppEngineModule());        
+        
     }
 
 }

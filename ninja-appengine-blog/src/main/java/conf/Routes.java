@@ -38,6 +38,9 @@ public class Routes implements ApplicationRoutes {
     @Override
     public void init(Router router) {  
         
+        // puts test data into db:
+        router.GET().route("/setup").with(ApplicationController.class, "setup");
+        
         ///////////////////////////////////////////////////////////////////////
         // Login / Logout
         ///////////////////////////////////////////////////////////////////////

@@ -1,0 +1,344 @@
+<!-- Copyright (C) 2012 the original author or authors. Licensed under the 
+    Apache License, Version 2.0 (the "License"); you may not use this file except 
+    in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+    Unless required by applicable law or agreed to in writing, software distributed 
+    under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+    OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+    the specific language governing permissions and limitations under the License. -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>ninja-appengine-blog</artifactId>
+    <packaging>war</packaging>
+    <name>How to build a blog with Ninja at the Appengine</name>
+    
+    <parent>
+		<groupId>org.ninjaframework</groupId>
+		<artifactId>ninja-appengine</artifactId>
+		<version>1.5.6-SNAPSHOT</version>
+	</parent>
+
+    <properties>
+        <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
+    </properties>
+
+
+    <repositories>
+        <repository>
+            <id>objectify-appengine</id>
+            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <!-- Default output dir, so that appengine devserver picks up changes: -->
+        <!-- To trigger automatic restarts you have to touch appengine-web.xml -->
+        <!-- More info here: http://stackoverflow.com/questions/800701/how-do-i-restart-the-google-app-engine-java-server-in-eclipse -->
+        <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
+
+        <plugins>
+
+            <plugin>
+                <!-- Used to filter the dev mode into appengine-web.xml -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <webResources>
+                        <webResource>
+                            <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+
+                            <targetPath>WEB-INF</targetPath>
+                            <filtering>true</filtering>
+                        </webResource>
+                    </webResources>
+                </configuration>
+
+            </plugin>
+
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.22</version>
+                <configuration>
+                    <contextPath>/</contextPath>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <reload>automatic</reload>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>appengine.generated.dir</name>
+                            <value>${appengine.generated.dir}</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+
+            </plugin>
+
+            <plugin>
+                <!-- It is not really recommended to use mvn appengine:devserver, 
+                    instead use jetty:run -->
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${appengine.version}</version>
+                <configuration>
+                    <appId>raplayground</appId>
+                    <version>torino</version>
+                    <jvmFlags>
+                    <!-- see also: http://blog.cwill-dev.com/2011/11/22/grails-java-lang-outofmemoryerror-permgen-space/ -->
+                        <jvmFlag>-Xms512m</jvmFlag>
+                        <jvmFlag>-Xmx1024m</jvmFlag>
+                        <jvmFlag>-XX:PermSize=256m</jvmFlag>
+                        <jvmFlag>-XX:MaxPermSize=512m</jvmFlag>
+                        <jvmFlag>-XX:+UseParNewGC</jvmFlag>
+                        <jvmFlag>-XX:MaxNewSize=256m</jvmFlag>
+                        <jvmFlag>-XX:NewSize=256m</jvmFlag>
+                        <jvmFlag>-XX:SurvivorRatio=128</jvmFlag>
+                        <jvmFlag>-XX:+UseTLAB</jvmFlag>
+                        <jvmFlag>-XX:+UseConcMarkSweepGC</jvmFlag>
+                        <jvmFlag>-XX:+CMSClassUnloadingEnabled</jvmFlag>
+                        <jvmFlag>-XX:+CMSPermGenSweepingEnabled</jvmFlag>
+                    </jvmFlags>
+                </configuration>
+            </plugin>
+
+            <!-- We recreate the VM used for testing each time -->
+            <!-- The in memory simulation of the GAE datastore does not like parallel execution -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>1</forkCount>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+             </plugin>
+
+        </plugins>
+
+
+
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <excludes>
+                <exclude>**/*.class</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.ninjaframework</groupId>
+            <artifactId>ninja-servlet</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ninjaframework</groupId>
+            <artifactId>ninja-core-test</artifactId>
+            <version>1.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ninjaframework</groupId>
+            <artifactId>ninja-appengine-module</artifactId>
+            <version>1.5.6-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-stubs</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-tools-sdk</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-testing</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+
+
+    <profiles>
+        <!-- Two reasons why we have two profiles (one default profile and 
+            a deployment profile) -->
+        <!-- Reason 1) We have to filter appengine-web.xml to set the correct 
+            ninja.mode -->
+        <!-- Reason 2) We need the stubs to access the datastore and so on 
+            while developing and in the tests. -->
+        <!-- It is especially important that these dependencies do not get 
+            deployed in reality. -->
+        <profile>
+            <id>appengine-dev</id><!-- that's the ninja mode to filter in 
+                appengine-web.xml -->
+            <properties>
+                <!-- that's the ninja mode to filter in appengine-web.xml -->
+                <ninja.mode>dev</ninja.mode>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <!-- Dependencies to make dev and test mode work nicely (not 
+                needed in production). -->
+            <dependencies>
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-stubs</artifactId>
+                    <version>${appengine.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-tools-sdk</artifactId>
+                    <version>${appengine.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-labs</artifactId>
+                    <version>${appengine.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-testing</artifactId>
+                    <version>${appengine.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+
+        </profile>
+
+        <profile>
+            <id>jetty-dev</id><!-- that's the ninja mode to filter in appengine-web.xml -->
+            <properties>
+                <!-- that's the ninja mode to filter in appengine-web.xml -->
+                <ninja.mode>dev</ninja.mode>
+            </properties>
+
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <!-- Dependencies to make dev and test mode work nicely (not 
+                needed in production). -->
+            <dependencies>
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-stubs</artifactId>
+                    <version>${appengine.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-tools-sdk</artifactId>
+                    <version>${appengine.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-labs</artifactId>
+                    <version>${appengine.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-testing</artifactId>
+                    <version>${appengine.version}</version>
+                </dependency>
+            </dependencies>
+
+        </profile>
+
+        <profile>
+            <id>deployment</id>
+            <properties>
+                <!-- That's the Ninja mode to filter in appengine-web.xml -->
+                <ninja.mode>prod</ninja.mode>
+            </properties>
+            <dependencies>
+
+
+                <!-- Dependencies to make test mode work nicely (not needed 
+                    in production). -->
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-stubs</artifactId>
+                    <version>${appengine.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-tools-sdk</artifactId>
+                    <version>${appengine.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-labs</artifactId>
+                    <version>${appengine.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-testing</artifactId>
+                    <version>${appengine.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+
+</project>

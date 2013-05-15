@@ -29,7 +29,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Maps;
 
-public class ApplicationControllerTest extends NinjaTest {
+public class ApplicationControllerTest extends NinjaAppengineTest {
 
     @Test
     public void testThatHomepageWorks() {

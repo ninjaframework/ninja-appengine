@@ -38,6 +38,18 @@ public class ApplicationController {
     public ApplicationController() {
 
     }
+    
+    /**
+     * Method to put initial data in the db...
+     * @return
+     */
+    public Result setup() {
+        
+        OfyService.setup();
+        
+        return Results.ok();
+        
+    }
 
     public Result index() {
 

@@ -14,17 +14,9 @@
     <name>How to build a blog with Ninja at the Appengine</name>
 
     <properties>
-        <appengine.version>1.7.7</appengine.version>
+        <appengine.version>1.8.0</appengine.version>
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
     </properties>
-
-
-    <repositories>
-        <repository>
-            <id>objectify-appengine</id>
-            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
-        </repository>
-    </repositories>
 
     <build>
         <!-- Default output dir, so that appengine devserver picks up changes: -->
@@ -39,8 +31,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
 
@@ -132,18 +124,15 @@
                 <includes>
                     <include>**/*</include>
                 </includes>
+                <excludes>
+                    <exclude>**/*.class</exclude>
+                </excludes>
             </resource>
         </resources>
 
     </build>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.ninjaframework</groupId>
-            <artifactId>ninja-servlet</artifactId>
-            <version>1.4</version>
-        </dependency>
 
         <dependency>
             <groupId>org.ninjaframework</groupId>
@@ -155,7 +144,7 @@
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-appengine-module</artifactId>
-            <version>1.5.5</version>
+            <version>1.6</version>
         </dependency>
 
         <dependency>
