@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-servlet</artifactId>
-            <version>1.4</version>
+            <version>${ninja.version}</version>
         </dependency>
 
 

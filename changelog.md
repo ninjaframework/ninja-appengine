@@ -1,4 +1,9 @@
-1.6.0
+1.6.1
+=====
+
+ * Bump to ninja-1.4.2
+ 
+1.6
 =====
 
  * Bump to Appengine plugin and version 1.8.0

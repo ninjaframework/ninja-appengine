@@ -27,7 +27,7 @@ import com.google.inject.Singleton;
 @FilterWith(AppEngineFilter.class)
 public class IndexController {
 
-    public Result index() {;
+    public Result index() {
 
         return Results.html();
 
