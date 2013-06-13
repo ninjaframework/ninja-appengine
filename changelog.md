@@ -1,4 +1,12 @@
-1.6.1
+1.6.2
+=====
+
+ * Bump to ninja-1.4.4
+ * Bump to GAE 1.8.1
+ * Bump to objectify 4.0rc1
+ 
+ 
+ 1.6.1
 =====
 
  * Bump to ninja-1.4.2

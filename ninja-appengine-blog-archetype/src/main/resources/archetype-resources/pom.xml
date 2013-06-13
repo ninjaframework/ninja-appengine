@@ -14,7 +14,9 @@
     <name>How to build a blog with Ninja at the Appengine</name>
 
     <properties>
-        <appengine.version>1.8.0</appengine.version>
+        <appengine.version>1.8.1</appengine.version>
+        <ninja-appengine.version>1.6.2</ninja-appengine.version>
+        <ninja.version>1.4.4</ninja.version>
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
     </properties>
 
@@ -137,14 +139,14 @@
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-core-test</artifactId>
-            <version>1.4.2</version>
+            <version>${ninja.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-appengine-module</artifactId>
-            <version>1.6.1</version>
+            <version>${ninja-appengine.version}</version>
         </dependency>
 
         <dependency>
