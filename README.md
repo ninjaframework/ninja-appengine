@@ -26,6 +26,9 @@ In particular it uses:
 Usage
 =====
 
+ninja-appengine is released along with the GAE sdk. Therefore we use the same version.
+For instance ninja-appengine 1.8.1 uses SDK 1.8.1.
+
 Usage is straight forward. The most important thing you have to keep in mind is to annotate 
 your controller classes with
 

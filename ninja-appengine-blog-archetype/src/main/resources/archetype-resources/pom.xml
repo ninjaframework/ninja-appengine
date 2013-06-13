@@ -15,7 +15,6 @@
 
     <properties>
         <appengine.version>1.8.1</appengine.version>
-        <ninja-appengine.version>1.6.2</ninja-appengine.version>
         <ninja.version>1.4.4</ninja.version>
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
     </properties>
@@ -146,7 +145,7 @@
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-appengine-module</artifactId>
-            <version>${ninja-appengine.version}</version>
+            <version>${appengine.version}</version>
         </dependency>
 
         <dependency>

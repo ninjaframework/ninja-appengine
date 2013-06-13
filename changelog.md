@@ -1,3 +1,8 @@
+1.8.1
+=====
+
+ * Nothing new. We now just copy the GAE sdk versioning scheme for clarity.
+
 1.6.2
 =====
 

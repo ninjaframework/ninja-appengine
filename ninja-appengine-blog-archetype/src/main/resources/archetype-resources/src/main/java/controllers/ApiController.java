@@ -47,7 +47,7 @@ public class ApiController {
         
         List<Article> articles = ofy.load().type(Article.class).list();
         
-        return Results.json(articles);
+        return Results.json().render(articles);
         
     }
     
