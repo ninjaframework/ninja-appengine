@@ -9,3 +9,4 @@ target
 *.sql
 # no h2 databases
 *.db
+*.iml
