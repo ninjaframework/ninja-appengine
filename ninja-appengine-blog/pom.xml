@@ -15,20 +15,12 @@
     <parent>
 		<groupId>org.ninjaframework</groupId>
 		<artifactId>ninja-appengine</artifactId>
-		<version>1.6.2-SNAPSHOT</version>
+		<version>1.6.2</version>
 	</parent>
 
     <properties>
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
     </properties>
-
-
-    <repositories>
-        <repository>
-            <id>objectify-appengine</id>
-            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
-        </repository>
-    </repositories>
 
     <build>
         <!-- Default output dir, so that appengine devserver picks up changes: -->
@@ -159,7 +151,7 @@
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-appengine-module</artifactId>
-            <version>1.6.2-SNAPSHOT</version>
+            <version>1.6.2</version>
         </dependency>
 
         <dependency>

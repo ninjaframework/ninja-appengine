@@ -12,12 +12,12 @@
     <artifactId>ninja-appengine-module</artifactId>
     <packaging>jar</packaging>
 
-    <name>Appengine support for Ninja</name>
+    <name>Google App Engine support for Ninja</name>
 
     <parent>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine</artifactId>
-        <version>1.6.2-SNAPSHOT</version>
+        <version>1.6.2</version>
     </parent>
 
     <dependencies>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.googlecode.objectify</groupId>
             <artifactId>objectify</artifactId>
-            <version>4.0b2</version>
+            <version>${objectify.version}</version>
         </dependency>
         
         <dependency>

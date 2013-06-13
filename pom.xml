@@ -22,7 +22,7 @@
 	<groupId>org.ninjaframework</groupId>
 	<artifactId>ninja-appengine</artifactId>
 	<packaging>pom</packaging>
-	<version>1.6.2-SNAPSHOT</version>
+	<version>1.6.2</version>
 	<name>Google App Engine support for Ninja Framework</name>
 	<url>http://www.ninjaframework.org</url>
 
@@ -43,8 +43,9 @@
 
 	<!-- pin encoding to utf-8 -->
 	<properties>
-        <appengine.version>1.8.0</appengine.version>
-        <ninja.version>1.4.2</ninja.version>
+        <appengine.version>1.8.1</appengine.version>
+        <ninja.version>1.4.4</ninja.version>
+        <objectify.version>4.0rc1</objectify.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<siteProjectVersion>${project.version}</siteProjectVersion>
