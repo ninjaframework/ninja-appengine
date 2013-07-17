@@ -25,6 +25,8 @@ import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
+import ninja.cache.Cache;
+import ninja.cache.NinjaCache;
 import ninja.params.Param;
 import ninja.utils.NinjaProperties;
 
@@ -43,13 +45,17 @@ public class CommentController {
     
     @Inject
     NinjaProperties ninjaProperties;
+    
+    @Inject
+    NinjaCache cache;
 
 
     public Result postComment(Context context,
                               @Param("text") String text,
                               @Param("email") String email) {
         
-        
+        // just make sure that the cache works in integration tests.
+        cache.set("key", "arbitraryValue", "10s");
 
         Objectify ofy = OfyService.ofy();
 

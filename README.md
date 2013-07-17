@@ -32,7 +32,7 @@ For instance ninja-appengine 1.8.1 uses SDK 1.8.1.
 Usage is straight forward. The most important thing you have to keep in mind is to annotate 
 your controller classes with
 
-    @FilterWith(AppEngineFilter.class
+    @FilterWith(AppEngineFilter.class)
     public class MyController {
         ...
     }
@@ -212,6 +212,16 @@ with "prod" in case of the deployment profile and "dev" else...
         </system-properties>
     
     </appengine-web-app>
+
+
+Special configuration variables in application.conf
+---------------------------------------------------
+
+(If you are using the default Ninja AppEngine archetype there is nothing you have to set up)
+
+ * <code>cache.implementation=ninja.appengine.AppEngineCacheImpl</code> Tells Ninja to use the GAE built in cache.
+ * <code>postoffice.implementation=ninja.appengine.AppEnginePostofficeImpl</code> Tells Ninja to use GAE to send mails.
+
 
 
 

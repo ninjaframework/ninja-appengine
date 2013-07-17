@@ -1,3 +1,8 @@
+1.8.1.1
+=======
+
+ * Added native GAE caching support support via (cache.implementation=ninja.appengine.AppEngineCacheImpl) (ra)
+
 1.8.1
 =====
 
