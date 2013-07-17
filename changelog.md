@@ -1,7 +1,11 @@
-1.8.1.1
+1.8.2
 =======
 
- * Added native GAE caching support support via (cache.implementation=ninja.appengine.AppEngineCacheImpl) (ra)
+ * 2013-07-01 Added native GAE caching support support via (cache.implementation=ninja.appengine.AppEngineCacheImpl) (ra)
+ * 2013-07-17 Bump to Appengine SDK 1.8.2 (ra)
+ * 2013-07-17 Bump to Ninja 1.5.1 (ra)
+ * 2013-07-17 Bump to Objectify 4.0rc1 (ra)
+
 
 1.8.1
 =====
