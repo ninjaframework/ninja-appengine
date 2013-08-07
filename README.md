@@ -10,7 +10,7 @@
 Google App Engine support for Ninja
 ===================================
 
-- CI: https://buildhive.cloudbees.com/job/reyez/job/ninja-appengine
+- CI: https://buildhive.cloudbees.com/job/ninjaframework/job/ninja-appengine
 - Mailing list and forum:  https://groups.google.com/forum/#!forum/ninja-framework
 - More about Ninja: http://www.ninjaframework.org
 
@@ -18,7 +18,7 @@ Google App Engine support for Ninja
 This module allows to use Ninja on the GAE easily.
 
 In particular it uses:
-- Objectify to store data,
+- Objectify to store data.
 - The default Mailer.
 - Everything else is absolutely standard Ninja.
 
@@ -26,8 +26,8 @@ In particular it uses:
 Usage
 =====
 
-ninja-appengine is released along with the GAE sdk. Therefore we use the same version.
-For instance ninja-appengine 1.8.1 uses SDK 1.8.1.
+ninja-appengine is released along with the GAE SDK. Therefore we use the same version.
+For instance ninja-appengine 1.8.3 uses SDK 1.8.3.
 
 Usage is straight forward. The most important thing you have to keep in mind is to annotate 
 your controller classes with
@@ -68,7 +68,7 @@ More about Objectify: https://code.google.com/p/objectify-appengine/
 Quick start
 ===========
 
-Generate a Ninja appengine archetype by calling the follwing command:
+Generate a Ninja Appengine archetype by calling the following command:
 
     mvn archetype:generate -DarchetypeGroupId=org.ninjaframework -DarchetypeArtifactId=ninja-appengine-blog-archetype
 
@@ -97,7 +97,7 @@ Starting the dev environment can be done in two ways:
 - You can use jetty to run your app:
 
     mvn jetty:run -Pjetty-dev 
-    (automatially picks up changes, but does not provide built in admin tools)
+    (automatically picks up changes, but does not provide built in admin tools)
 
    
 Hint: If you are using the devserver it makes a lot of sense to automatically touch appengine-web.xml
@@ -149,7 +149,7 @@ pom.xml
     <dependency>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine-module</artifactId>
-        <version>1.6</version>
+        <version>1.8.3</version>
     </dependency>
 
 
@@ -189,8 +189,8 @@ It is also important to filter the resources to finally set the mode dev / produ
 appengine-web.xml
 -----------------
 
-The appengine xml is pretty default. The only difference is that we are setting
-the ninja mode via a system property. Now the whole process inside the pom.xml
+The Appengine xml is pretty default. The only difference is that we are setting
+the Ninja mode via a system property. Now the whole process inside the pom.xml
 makes more sense I guess :) ${ninja.mode} is simply the variable getting exchanged
 with "prod" in case of the deployment profile and "dev" else...
 

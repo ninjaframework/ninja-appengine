@@ -43,14 +43,14 @@
 
 	<!-- pin encoding to utf-8 -->
 	<properties>
-        <appengine.version>1.8.2</appengine.version>
-        <ninja.version>1.5.1</ninja.version>
+        <appengine.version>1.8.3</appengine.version>
+        <ninja.version>1.6.0</ninja.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<siteProjectVersion>${project.version}</siteProjectVersion>
 	</properties>
 
-	<!-- Fix version 1.6 of java compiler in all submodules: -->
+	<!-- Fix version 1.7 of java compiler in all submodules: -->
 	<build>
 
 		<pluginManagement>

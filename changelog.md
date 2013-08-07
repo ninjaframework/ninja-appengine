@@ -1,5 +1,13 @@
+1.8.3
+=====
+
+ * 2013-08-07 Bump to Appengine SDK 1.8.3 (ra)
+ * 2013-08-07 Bump to Ninja 1.6.0 (ra)
+ * 2013-08-07 Added enforcer plugin to ninja-appengine-blog to make
+              sure we do not include commons-logging on the classpath (ra)
+ 
 1.8.2
-=======
+=====
 
  * 2013-07-01 Added native GAE caching support support via (cache.implementation=ninja.appengine.AppEngineCacheImpl) (ra)
  * 2013-07-17 Bump to Appengine SDK 1.8.2 (ra)
