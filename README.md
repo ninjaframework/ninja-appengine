@@ -23,6 +23,14 @@ In particular it uses:
 - Everything else is absolutely standard Ninja.
 
 
+IMPORTANT NOTES
+===============
+
+- Please upgrade to at least 1.8.3 asap as previous versions contain a security issue. Please find more
+  at the release notes of Ninja 1.6.0.
+- From 1.8.3 onwards you need Maven 3.1 to build your GAE projects.
+
+
 Usage
 =====
 
