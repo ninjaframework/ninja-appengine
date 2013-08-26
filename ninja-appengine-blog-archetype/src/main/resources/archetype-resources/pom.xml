@@ -49,7 +49,9 @@
                             <includes>
                                 <include>**/*</include>
                             </includes>
-
+                            <excludes>
+                                <exclude>**/*.java</exclude>
+                            </excludes>
                             <targetPath>WEB-INF</targetPath>
                             <filtering>true</filtering>
                         </webResource>
@@ -85,6 +87,7 @@
                 <configuration>
                     <appId>YOUR_APP_ID</appId>
                     <version>YOUR_APP_VERSION</version>
+                    <enableJarClasses>true</enableJarClasses>
                     <jvmFlags>
                     <!-- see also: http://blog.cwill-dev.com/2011/11/22/grails-java-lang-outofmemoryerror-permgen-space/ -->
                         <jvmFlag>-Xms512m</jvmFlag>
@@ -126,8 +129,14 @@
                     <include>**/*</include>
                 </includes>
                 <excludes>
-                    <exclude>**/*.class</exclude>
+                    <exclude>**/*.java</exclude>
                 </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
             </resource>
         </resources>
 

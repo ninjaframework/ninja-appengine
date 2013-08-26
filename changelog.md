@@ -1,3 +1,9 @@
+XXXXX
+=====
+
+  * 2013-08-26 Tiny fix to exclude java files from archetype deployment (ra) 
+  * 2013-08-26 enableJarClasses enabled by default at archetype (ra) 
+
 1.8.3
 =====
 
