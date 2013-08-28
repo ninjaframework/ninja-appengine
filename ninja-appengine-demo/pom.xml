@@ -75,7 +75,9 @@
                             <includes>
                                 <include>**/*</include>
                             </includes>
-
+                            <excludes>
+                                <exclude>**/*.java</exclude>
+                            </excludes>
                             <targetPath>WEB-INF</targetPath>
                             <filtering>true</filtering>
                         </webResource>
@@ -140,7 +142,7 @@
                     <include>**/*</include>
                 </includes>
                 <excludes>
-                    <exclude>**/*.class</exclude>
+                    <exclude>**/*.java</exclude>
                 </excludes>
             </resource>
         </resources>
