@@ -43,17 +43,17 @@
         
         <${symbol_pound}include "header.ftl.html"/>
         
-        <${symbol_pound}if flash_error??>
+        <${symbol_pound}if flash.error??>
             <div class="alert alert-error">  
                 <a class="close" data-dismiss="alert"></a>  
-                <strong>Error! </strong>${symbol_dollar}{flash_error}.  
+                <strong>Error! </strong>${symbol_dollar}{flash.error}.  
             </div>  
         </${symbol_pound}if>
     
-        <${symbol_pound}if flash_success??>
+        <${symbol_pound}if flash.success??>
             <div class="alert alert-success">  
                 <a class="close" data-dismiss="alert"></a>  
-                <strong>Success! </strong>${symbol_dollar}{flash_success}.  
+                <strong>Success! </strong>${symbol_dollar}{flash.success}.  
             </div>  
         </${symbol_pound}if>
 

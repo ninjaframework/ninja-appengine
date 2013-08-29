@@ -3,6 +3,7 @@ XXXXX
 
   * 2013-08-26 Tiny fix to exclude java files from archetype deployment (ra) 
   * 2013-08-26 enableJarClasses enabled by default at archetype (ra) 
+  * 2013-08-29 Fixed wrong flash_* ("_" was replaced with ".") in archetype and blog demo (ra) 
 
 1.8.3
 =====

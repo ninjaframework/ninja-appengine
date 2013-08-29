@@ -14,11 +14,11 @@ tinymce.init({
     <form action="/article/new" method="post">
         <p>
             <label for="author">Title</label>
-            <input type="text" name="title" style="width:70%" id="title" value="${(flash_title!"")}"/>
+            <input type="text" name="title" style="width:70%" id="title" value="${(flash.title!"")}"/>
         </p>
         <p>
             <label for="content">Content </label>
-            <textarea name="content" style="width:100%">${(flash_content!"")}</textarea>
+            <textarea name="content" style="width:100%">${(flash.content!"")}</textarea>
         </p>
         <p>
             <input type="submit" value="Submit your comment" />

@@ -40,17 +40,17 @@
         
         <#include "header.ftl.html"/>
         
-        <#if flash_error??>
+        <#if flash.error??>
             <div class="alert alert-error">  
                 <a class="close" data-dismiss="alert"></a>  
-                <strong>Error! </strong>${flash_error}.  
+                <strong>Error! </strong>${flash.error}.  
             </div>  
         </#if>
     
-        <#if flash_success??>
+        <#if flash.success??>
             <div class="alert alert-success">  
                 <a class="close" data-dismiss="alert"></a>  
-                <strong>Success! </strong>${flash_success}.  
+                <strong>Success! </strong>${flash.success}.  
             </div>  
         </#if>
 
