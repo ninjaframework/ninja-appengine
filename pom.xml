@@ -23,7 +23,6 @@
 	<artifactId>ninja-appengine</artifactId>
 	<packaging>pom</packaging>
 	<version>1.8.4-SNAPSHOT</version>
-	<name>Google App Engine support for Ninja Framework</name>
 	<url>http://www.ninjaframework.org</url>
 
 	<!-- Deploy to central maven using the oss-parent of sonatype -->
@@ -36,15 +35,14 @@
 
 	<modules>
         <module>ninja-appengine-module</module>
-		<module>ninja-appengine-demo</module>
-        <module>ninja-appengine-blog</module>
-        <module>ninja-appengine-blog-archetype</module>        
+        <module>ninja-appengine-integration-test-blog</module>
+        <module>ninja-appengine-archetype</module>
 	</modules>
 
 	<!-- pin encoding to utf-8 -->
 	<properties>
         <appengine.version>1.8.3</appengine.version>
-        <ninja.version>1.6.0</ninja.version>
+        <ninja.version>1.6.1-SNAPSHOT</ninja.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<siteProjectVersion>${project.version}</siteProjectVersion>
@@ -56,14 +54,19 @@
 		<pluginManagement>
 
 			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
-					</configuration>
-				</plugin>
+                <!-- We use the compiler together with Google's error-prone project. -->
+                <!-- Error-prone is a bit like findbugs, but at compile time and  -->
+                <!-- helps to prevent bugs. -->
+                <!-- More at: https://code.google.com/p/error-prone/ -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
                 
                 <!-- We recreate the VM used for testing each time -->
                 <!-- The in memory simulation of the GAE datastore does not like parallel execution -->

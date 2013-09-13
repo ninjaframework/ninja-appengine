@@ -12,8 +12,6 @@
     <artifactId>ninja-appengine-module</artifactId>
     <packaging>jar</packaging>
 
-    <name>Google App Engine support for Ninja</name>
-
     <parent>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine</artifactId>

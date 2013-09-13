@@ -4,6 +4,8 @@ XXXXX
   * 2013-08-26 Tiny fix to exclude java files from archetype deployment (ra) 
   * 2013-08-26 enableJarClasses enabled by default at archetype (ra) 
   * 2013-08-29 Fixed wrong flash_* ("_" was replaced with ".") in archetype and blog demo (ra) 
+  * 2013-09-01 Bugfix - static assets should not handle any flash or session scopes 
+               https://github.com/ninjaframework/ninja/issues/109 (Sojin, ra).
 
 1.8.3
 =====
