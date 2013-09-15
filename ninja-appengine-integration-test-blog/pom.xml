@@ -196,6 +196,7 @@
     </build>
 
     <dependencies>
+    
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>tinymce-jquery</artifactId>
