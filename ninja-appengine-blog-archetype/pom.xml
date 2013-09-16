@@ -8,7 +8,7 @@
         <version>1.8.4-SNAPSHOT</version>
   </parent>
 
-  <artifactId>ninja-appengine-archetype</artifactId>
+  <artifactId>ninja-appengine-blog-archetype</artifactId>
   <packaging>maven-archetype</packaging>
 
   <build>
