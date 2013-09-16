@@ -19,7 +19,6 @@
 
 package controllers;
 
-import models.User;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -27,14 +26,17 @@ import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlecode.objectify.Objectify;
 
-import conf.OfyService;
+import dao.UserDao;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
 public class LoginLogoutController {
+    
+    @Inject
+    UserDao userDao;
     
     
     ///////////////////////////////////////////////////////////////////////////
@@ -50,29 +52,25 @@ public class LoginLogoutController {
                             @Param("password") String password,
                             Context context) {
 
-        if (username != null && password != null) {
+        boolean isUserNameAndPasswordValid = userDao.isUserAndPasswordValid(username, password);
+        
+        
+        if (isUserNameAndPasswordValid) {
+            context.getSessionCookie().put("username", username);
+            context.getFlashCookie().success("login.loginSuccessful");
+            
+            return Results.redirect("/");
+            
+        } else {
+            
+            // something is wrong with the input or password not found.
+            context.getFlashCookie().put("username", username);
+            context.getFlashCookie().error("login.errorLogin");
 
-            Objectify ofy = OfyService.ofy();
-            User user = ofy.load().type(User.class)
-                    .filter("username", username).first().get();
-
-            if (user.password != null
-                    && user.password.equals(password)) {
-                // some basic authentication...
-                context.getSessionCookie().put("username", username);
-                context.getFlashCookie().success("login successful");
-
-                return Results.redirect("/");
-            }
-
+            return Results.redirect("/login");
+            
         }
-
-        // something is wrong with the input or password not found.
-        context.getFlashCookie().put("username", username);
-        context.getFlashCookie().error("Error username / password not valid.");
-
-        return Results.redirect("/login");
-
+        
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -82,7 +80,7 @@ public class LoginLogoutController {
 
         // remove any user dependent information
         context.getSessionCookie().clear();
-        context.getFlashCookie().success("Logout successful.");
+        context.getFlashCookie().success("login.logoutSuccessful");
 
         return Results.redirect("/");
 

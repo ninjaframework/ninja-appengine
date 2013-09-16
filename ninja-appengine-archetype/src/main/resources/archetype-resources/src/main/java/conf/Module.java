@@ -30,7 +30,9 @@ public class Module extends AbstractModule {
 
     protected void configure() {
         
-        install(new AppEngineModule());
+        bind(StartupActions.class);
+        install(new AppEngineModule());        
+        
     }
 
 }

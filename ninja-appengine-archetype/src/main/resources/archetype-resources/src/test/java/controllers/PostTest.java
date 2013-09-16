@@ -9,7 +9,6 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import models.Article;
-import models.Comment;
 import models.User;
 
 import org.junit.Test;
@@ -37,7 +36,7 @@ public class PostTest extends NinjaAppengineBackendTest {
         ofy.save().entity(post).now();
              
         // Test that the post has been created
-        assertNotNull(ofy.load().type(Article.class).first().get());
+        assertNotNull(ofy.load().type(Article.class).first().now());
         
         // Retrieve all posts created by Bob
         List<Article> bobPosts = ofy.load().type(Article.class)
@@ -53,5 +52,5 @@ public class PostTest extends NinjaAppengineBackendTest {
         assertEquals("Hello world", firstPost.content);
         assertNotNull(firstPost.postedAt);
     }
-
+    
 }

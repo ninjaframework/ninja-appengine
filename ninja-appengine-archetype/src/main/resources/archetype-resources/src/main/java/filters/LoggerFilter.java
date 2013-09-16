@@ -29,30 +29,29 @@ import org.slf4j.Logger;
 import com.google.inject.Inject;
 
 /**
- * Just a simple demo filter that changes exemplifies two things 1. Change the
- * output of the response 2. Change the status code. 3. Stops execution of all
- * other filters and the route method itself.
+ * This is just a demo for a filter. This filter just logs a request in level
+ * info. Be inspired and use your own filter.
  * 
- * We are simply using 418 I'm a teapot (RFC 2324) .
+ * Filters can be attached to classes or methods via @FilterWith(LoggerFilter.class)
  * 
  * @author ra
  * 
  */
 public class LoggerFilter implements Filter {
-	
-	private final Logger logger;
 
-	@Inject
-	public LoggerFilter(Logger logger) {
-		this.logger = logger;
-		
-	}
+    private final Logger logger;
 
-	@Override
-	public Result filter(FilterChain chain, Context context) {
+    @Inject
+    public LoggerFilter(Logger logger) {
+        this.logger = logger;
 
-		logger.info("Got request from : " + context.getRequestPath());
+    }
+
+    @Override
+    public Result filter(FilterChain chain, Context context) {
+
+        logger.info("Got request from : " + context.getRequestPath());
         return chain.next(context);
-	}
+    }
 
 }

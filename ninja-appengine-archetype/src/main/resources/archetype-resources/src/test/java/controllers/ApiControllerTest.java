@@ -20,34 +20,54 @@
 package controllers;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Type;
-import java.util.List;
+import java.util.Date;
+import java.util.Map;
 
 import models.ArticleDto;
+import models.ArticlesDto;
 import ninja.NinjaTest;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.reflect.TypeToken;
+import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 
-public class ApiControllerTest extends NinjaAppengineTest {
+public class ApiControllerTest extends NinjaTest {
+    
+    @Before
+    public void setup() {
+        
+        ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
+        
+    }
 
     @Test
-    public void testGetAndPostArticle() throws Exception {
+    public void testGetAndPostArticleViaJson() throws Exception {
 
         // /////////////////////////////////////////////////////////////////////
         // Test initial data:
         // /////////////////////////////////////////////////////////////////////
         String response = ninjaTestBrowser.makeJsonRequest(getServerAddress()
-                + "api/bob@gmail.com/articles");
+                + "api/bob@gmail.com/articles.json");
+        System.out.println("response: " + response);
 
-        Type listOfArticles = new TypeToken<List<ArticleDto>>() {}.getType();
-        List<ArticleDto> result = new Gson().fromJson(response, listOfArticles);
+        ArticlesDto articlesDto = getGsonWithLongToDateParsing().fromJson(
+                response, ArticlesDto.class);
 
-        assertEquals(3, result.size());
-        
+        assertEquals(3, articlesDto.articles.size());
+
         // /////////////////////////////////////////////////////////////////////
         // Post new article:
         // /////////////////////////////////////////////////////////////////////
@@ -55,19 +75,108 @@ public class ApiControllerTest extends NinjaAppengineTest {
         articleDto.content = "contentcontent";
         articleDto.title = "new title new title";
 
-        ninjaTestBrowser.postJson(getServerAddress()
-                + "api/bob@gmail.com/article", articleDto);
-        
+        response = ninjaTestBrowser.postJson(getServerAddress()
+                + "api/bob@gmail.com/article.json", articleDto);
+
+        assertTrue(response.contains("Error. Forbidden."));
+
+        doLogin();
+
+        response = ninjaTestBrowser.postJson(getServerAddress()
+                + "api/bob@gmail.com/article.json", articleDto);
+
+        assertFalse(response.contains("Error. Forbidden."));
+
         // /////////////////////////////////////////////////////////////////////
         // Fetch articles again => assert we got a new one ...
         // /////////////////////////////////////////////////////////////////////
         response = ninjaTestBrowser.makeJsonRequest(getServerAddress()
-                + "api/bob@gmail.com/articles");
+                + "api/bob@gmail.com/articles.json");
 
-        result = new Gson().fromJson(response, listOfArticles);
+        articlesDto = getGsonWithLongToDateParsing().fromJson(response, ArticlesDto.class);
         // one new result:
-        assertEquals(4, result.size());
+        assertEquals(4, articlesDto.articles.size());
+
+    }
+
+    @Test
+    public void testGetAndPostArticleViaXml() throws Exception {
+
+        // /////////////////////////////////////////////////////////////////////
+        // Test initial data:
+        // /////////////////////////////////////////////////////////////////////
+        String response = ninjaTestBrowser.makeXmlRequest(getServerAddress()
+                + "api/bob@gmail.com/articles.xml");
+        System.out.println("response xml: " + response);
         
+        JacksonXmlModule module = new JacksonXmlModule();
+        // and then configure, for example:
+        module.setDefaultUseWrapper(false);
+        XmlMapper xmlMapper = new XmlMapper(module);
+        
+
+        ArticlesDto articlesDto = xmlMapper.readValue(response, ArticlesDto.class);
+
+        assertEquals(3, articlesDto.articles.size());
+
+        // /////////////////////////////////////////////////////////////////////
+        // Post new article:
+        // /////////////////////////////////////////////////////////////////////
+        ArticleDto articleDto = new ArticleDto();
+        articleDto.content = "contentcontent";
+        articleDto.title = "new title new title";
+
+        response = ninjaTestBrowser.postXml(getServerAddress()
+                + "api/bob@gmail.com/article.xml", articleDto);
+
+        assertTrue(response.contains("Error. Forbidden."));
+
+        doLogin();
+
+        response = ninjaTestBrowser.postXml(getServerAddress()
+                + "api/bob@gmail.com/article.xml", articleDto);
+
+        assertFalse(response.contains("Error. Forbidden."));
+
+        // /////////////////////////////////////////////////////////////////////
+        // Fetch articles again => assert we got a new one ...
+        // /////////////////////////////////////////////////////////////////////
+        response = ninjaTestBrowser.makeXmlRequest(getServerAddress()
+                + "api/bob@gmail.com/articles.xml");
+
+        articlesDto = xmlMapper.readValue(response, ArticlesDto.class);
+        // one new result:
+        assertEquals(4, articlesDto.articles.size());
+
+    }
+
+    private Gson getGsonWithLongToDateParsing() {
+        // Creates the json object which will manage the information received
+        GsonBuilder builder = new GsonBuilder();
+        // Register an adapter to manage the date types as long values
+        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+            public Date deserialize(JsonElement json,
+                                    Type typeOfT,
+                                    JsonDeserializationContext context)
+                    throws JsonParseException {
+                return new Date(json.getAsJsonPrimitive().getAsLong());
+            }
+        });
+        Gson gson = builder.create();
+
+        return gson;
+    }
+
+    private void doLogin() {
+
+        Map<String, String> headers = Maps.newHashMap();
+
+        Map<String, String> formParameters = Maps.newHashMap();
+        formParameters.put("username", "bob@gmail.com");
+        formParameters.put("password", "secret");
+
+        ninjaTestBrowser.makePostRequestWithFormParameters(getServerAddress()
+                + "login", headers, formParameters);
 
     }
 

@@ -29,15 +29,20 @@ import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
 
 import conf.OfyService;
+import dao.ArticleDao;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
 public class ApplicationController {
 
+    @Inject
+    ArticleDao articleDao;
+    
     public ApplicationController() {
 
     }
@@ -56,19 +61,18 @@ public class ApplicationController {
 
     public Result index() {
 
-        Objectify ofy = OfyService.ofy();
+        Article frontPost = articleDao.getFirstArticleForFrontPage();
 
-        Article frontPost = ofy.load().type(Article.class).order("-postedAt").first()
-                .get();
-
-        List<Article> olderPosts = ofy.load().type(Article.class).order("-postedAt")
-                .offset(1).limit(10).list();
+        List<Article> olderPosts = articleDao.getOlderArticlesForFrontPage();
 
         Map<String, Object> map = Maps.newHashMap();
         map.put("frontArticle", frontPost);
         map.put("olderArticles", olderPosts);
 
-        return Results.html().render(map);
+        return Results
+                .html()
+                .render("frontArticle", frontPost)
+                .render("olderArticles", olderPosts);
 
     }
 

@@ -1,32 +1,49 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-<${symbol_pound}import "../layout/defaultLayout.ftl.html" as layout> 
-<@layout.myLayout "Home page">  
+<${symbol_pound}import "../layout/defaultLayout.ftl.html" as layout> <@layout.myLayout i18n("articleNew.pageTitle")>
 
-<script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea"
- });
+
+<script defer type="text/javascript">
+	${symbol_dollar}(window).load(function() {
+		tinyMCE.init({
+			mode : "textareas"
+		});
+	});
 </script>
-  
 
-    <h1>New article</h1>
- 
-    <form action="/article/new" method="post">
-        <p>
-            <label for="author">Title</label>
-            <input type="text" name="title" style="width:70%" id="title" value="${symbol_dollar}{(flash.title!"")}"/>
-        </p>
-        <p>
-            <label for="content">Content </label>
-            <textarea name="content" style="width:100%">${symbol_dollar}{(flash.content!"")}</textarea>
-        </p>
-        <p>
-            <input type="submit" value="Submit your comment" />
-        </p>
-    </form>
-    
-    
+
+<div class="container">
+
+	<h1>${symbol_dollar}{i18n("articleNew.newArticle")}</h1>
+
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="col-lg-8">
+			<form action="/article/new" method="post" class="form-horizontal" role="form">
+
+                <div class="form-group">
+                    <label for="title" class="col-lg-2 control-label">${symbol_dollar}{i18n("articleNew.title")}</label>
+                    <div class="col-lg-10">
+                        <input type="text" name="title" id="title" value="${symbol_dollar}{(flash.title!" ")}" class="form-control"/>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="content" class="col-lg-2 control-label">${symbol_dollar}{i18n("articleNew.content")}</label>
+                    <div class="col-lg-10">
+                        <textarea name="content" class="form-control" id="content">${symbol_dollar}{(flash.content!"")}</textarea>
+                    </div>
+                </div>
+
+				<input type="submit" value="${symbol_dollar}{i18n("articleNew.postNewArticle")}" class="btn btn-success pull-right" />
+
+			</form>
+
+		</div>
+
+	</div>
+</div>
+
+
 </@layout.myLayout>

@@ -19,57 +19,69 @@
 
 package controllers;
 
-import java.util.List;
-
-import models.Article;
 import models.ArticleDto;
-import models.User;
+import models.ArticlesDto;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.SecureFilter;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.PathParam;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlecode.objectify.Objectify;
 
-import conf.OfyService;
+import dao.ArticleDao;
+import etc.LoggedInUser;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
 public class ApiController {
     
-    public Result getArticles(@PathParam("username") String username) {
+    @Inject
+    ArticleDao articleDao;
+    
+    public Result getArticlesJson() {
         
- 
+        ArticlesDto articlesDto = articleDao.getAllArticles();
         
-        Objectify ofy = OfyService.ofy();
-        
-        List<Article> articles = ofy.load().type(Article.class).list();
-        
-        return Results.json().render(articles);
+        return Results.json().render(articlesDto);
         
     }
     
-    public Result postArticle(@PathParam("username") String username,
+    public Result getArticlesXml() {
+        
+        ArticlesDto articlesDto = articleDao.getAllArticles();
+        
+        return Results.xml().render(articlesDto);
+        
+    }
+    
+    @FilterWith(SecureFilter.class)
+    public Result postArticleJson(@LoggedInUser String username,
                               ArticleDto articleDto) {
         
+        boolean succeeded = articleDao.postArticle(username, articleDto);
         
-        Objectify ofy = OfyService.ofy();
-        User user = ofy.load().type(models.User.class).filter("username", username).first().get();
-        
-        if (user == null) {
+        if (!succeeded) {
             return Results.notFound();
         } else {
-            
-            Article article = new Article(user, articleDto.title, articleDto.content);
-            ofy.save().entity(article).now();
             return Results.ok();
-            
         }
         
     }
     
-    
-
+    @FilterWith(SecureFilter.class)
+    public Result postArticleXml(@LoggedInUser String username,
+                                 ArticleDto articleDto) {        
+        
+        boolean succeeded = articleDao.postArticle(username, articleDto);
+        
+        if (!succeeded) {
+            return Results.notFound();
+        } else {
+            return Results.ok();
+        }
+        
+    }
 }

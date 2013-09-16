@@ -25,11 +25,19 @@ import java.util.Map;
 
 import ninja.NinjaTest;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
 
-public class LoginLogoutControllerTest extends NinjaAppengineTest {
+public class LoginLogoutControllerTest extends NinjaTest {
+    
+    @Before
+    public void setup() {
+        
+        ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
+        
+    }
 
     @Test
     public void testLogingLogout() {
@@ -41,7 +49,8 @@ public class LoginLogoutControllerTest extends NinjaAppengineTest {
         // /////////////////////////////////////////////////////////////////////
         String response = ninjaTestBrowser.makeRequest(getServerAddress()
                 + "article/new", headers);
-        assertTrue(response.contains("Access forbidden"));
+        System.out.println(response);
+        assertTrue(response.contains("Error. Forbidden."));
 
         // /////////////////////////////////////////////////////////////////////
         // Login
@@ -71,7 +80,8 @@ public class LoginLogoutControllerTest extends NinjaAppengineTest {
         // /////////////////////////////////////////////////////////////////////
         response = ninjaTestBrowser.makeRequest(getServerAddress()
                 + "article/new", headers);
-        assertTrue(response.contains("Access forbidden"));
+        System.out.println(response);
+        assertTrue(response.contains("Error. Forbidden."));
 
     }
 

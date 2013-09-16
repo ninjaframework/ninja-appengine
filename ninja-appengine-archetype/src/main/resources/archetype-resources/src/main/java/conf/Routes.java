@@ -19,15 +19,21 @@
 
 package conf;
 
+import com.google.inject.Inject;
+
 import ninja.AssetsController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
+import ninja.utils.NinjaProperties;
 import controllers.ApiController;
 import controllers.ApplicationController;
 import controllers.ArticleController;
 import controllers.LoginLogoutController;
 
 public class Routes implements ApplicationRoutes {
+    
+    @Inject
+    NinjaProperties ninjaProperties;
 
     /**
      * Using a (almost) nice DSL we can configure the router.
@@ -39,10 +45,12 @@ public class Routes implements ApplicationRoutes {
      *            The default router of this application
      */
     @Override
-    public void init(Router router) { 
+    public void init(Router router) {  
         
         // puts test data into db:
-        router.GET().route("/setup").with(ApplicationController.class, "setup");
+        if (!ninjaProperties.isProd()) {
+            router.GET().route("/setup").with(ApplicationController.class, "setup");
+        }
         
         ///////////////////////////////////////////////////////////////////////
         // Login / Logout
@@ -65,8 +73,10 @@ public class Routes implements ApplicationRoutes {
         ///////////////////////////////////////////////////////////////////////
         // Api for management of software
         ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/api/{username}/articles").with(ApiController.class, "getArticles");
-        router.POST().route("/api/{username}/article").with(ApiController.class, "postArticle");
+        router.GET().route("/api/{username}/articles.json").with(ApiController.class, "getArticlesJson");
+        router.GET().route("/api/{username}/articles.xml").with(ApiController.class, "getArticlesXml");
+        router.POST().route("/api/{username}/article.json").with(ApiController.class, "postArticleJson");
+        router.POST().route("/api/{username}/article.xml").with(ApiController.class, "postArticleXml");
  
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)

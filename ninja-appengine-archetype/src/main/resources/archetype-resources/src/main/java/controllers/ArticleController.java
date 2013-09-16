@@ -3,11 +3,8 @@
 #set( $symbol_escape = '\' )
 package controllers;
 
-import java.util.Map;
-
 import models.Article;
 import models.ArticleDto;
-import models.User;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -18,15 +15,18 @@ import ninja.params.PathParam;
 import ninja.validation.JSR303Validation;
 import ninja.validation.Validation;
 
-import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlecode.objectify.Objectify;
 
-import conf.OfyService;
+import dao.ArticleDao;
+import etc.LoggedInUser;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
 public class ArticleController {
+    
+    @Inject
+    ArticleDao articleDao;
 
     ///////////////////////////////////////////////////////////////////////////
     // Show article
@@ -37,16 +37,11 @@ public class ArticleController {
 
         if (id != null) {
 
-            Objectify ofy = OfyService.ofy();
-            article = ofy.load().type(Article.class).filter("id", id).first()
-                    .get();
+            article = articleDao.getArticle(id);
 
         }
 
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("article", article);
-
-        return Results.html().render(map);
+        return Results.html().render("article", article);
 
     }
     
@@ -61,27 +56,22 @@ public class ArticleController {
     }
 
     @FilterWith(SecureFilter.class)
-    public Result articleNewPost(Context context,
-                                 @JSR303Validation ArticleDto articleForm,
+    public Result articleNewPost(@LoggedInUser String username,
+                                 Context context,
+                                 @JSR303Validation ArticleDto articleDto,
                                  Validation validation) {
 
         if (validation.hasViolations()) {
 
             context.getFlashCookie().error("Please correct field.");
-            context.getFlashCookie().put("title", articleForm.title);
-            context.getFlashCookie().put("content", articleForm.content);
+            context.getFlashCookie().put("title", articleDto.title);
+            context.getFlashCookie().put("content", articleDto.content);
 
             return Results.redirect("/article/new");
 
         } else {
-
-            String username = context.getSessionCookie().get("username");
             
-            Objectify ofy = OfyService.ofy();
-            User user = ofy.load().type(User.class).filter("username", username).first().get();
-            
-            Article article = new Article(user, articleForm.title, articleForm.content);
-            ofy.save().entity(article);
+            articleDao.postArticle(username, articleDto);
             
             context.getFlashCookie().success("New article created.");
             

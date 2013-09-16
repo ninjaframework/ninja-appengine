@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+        <groupId>org.ninjaframework</groupId>
+        <artifactId>ninja-appengine</artifactId>
+        <version>1.8.4-SNAPSHOT</version>
+  </parent>
 
   <artifactId>ninja-appengine-archetype</artifactId>
   <packaging>maven-archetype</packaging>
-    
-    <parent>
-        <groupId>org.ninjaframework</groupId>
-		<artifactId>ninja-appengine</artifactId>
-		<version>1.8.4-SNAPSHOT</version>
-	</parent>
 
   <build>
     <extensions>
@@ -29,4 +29,27 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <description>Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/</description>
+
+  <url>http://www.ninjaframework.org/ninja-appengine-integration-test-blog</url>
+
+  <scm>
+    <connection>scm:git://github.com/reyez/ninja-appengine.git/ninja-appengine-integration-test-blog</connection>
+    <developerConnection>scm:git:git@github.com:reyez/ninja-appengine.git/ninja-appengine-integration-test-blog</developerConnection>
+    <url>https://github.com/reyez/ninja-appengine/ninja-appengine-integration-test-blog</url>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>sonatype-nexus-staging</id>
+      <name>Nexus Release Repository</name>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <name>Sonatype Nexus Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>
