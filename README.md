@@ -17,7 +17,7 @@ Google App Engine support for Ninja
 
 This module allows to use Ninja on the GAE easily.
 
-In particular it uses:
+In particular it provides:
 - Objectify to store data.
 - The default Mailer.
 - Everything else is absolutely standard Ninja.
@@ -95,37 +95,10 @@ Is as easy as:
 Starting
 ========
 
-Starting the dev environment can be done in two ways:
-    
-- You can use the devserver of GAE (RECOMMENDED)
+Use the devserver of GAE:
 
    mvn appengine:devserver -Pappengine-dev 
    (built-in admin tools, but setting up productive reloading requires one more step)
-   
-- You can use jetty to run your app:
-
-    mvn jetty:run -Pjetty-dev 
-    (automatically picks up changes, but does not provide built in admin tools)
-
-   
-Hint: If you are using the devserver it makes a lot of sense to automatically touch appengine-web.xml
-when you change your code. This causes the dev server tor restart and pick up your changes. 
-The idea comes from Miguel Vitorino at
-http://stackoverflow.com/questions/800701/how-do-i-restart-the-google-app-engine-java-server-in-eclipse
-
-Go to you project properties, Builders and add a new build step as a "Program". 
-Under "Location" enter the path to your "touch" command 
-("D:\bin\UnxUtils\usr\local\wbin\touch.exe" for example - on Posix systems just 
-"touch" should be enough since it's already in your PATH) and in "Arguments" put something 
-like "${project_loc}/war/WEB-INF/appengine-web.xml". Also go to the "Build Options" 
-tab and check "During auto builds".
-
-"touch" will update the timestamp in your appengine-web.xml. 
-When the App Engine server detects changes to you appengine-web.xml it will 
-reload the app automatically. The load process is very fast so it can be done whenever you 
-change any file in your project (which normally triggers the auto-build in Eclipse) - 
-you can tweak the builder to only run when you change certain types of files.
-
 
 
 Testing
@@ -140,7 +113,7 @@ Basic Setup
 ===========
 
 First of all have a look at the demo application at:
-https://github.com/reyez/ninja-appengine/tree/master/ninja-appengine-demo
+https://github.com/reyez/ninja-appengine/tree/master/ninja-appengine-blog-integration-test
 
 The demo application show best how to setup
 
@@ -157,7 +130,7 @@ pom.xml
     <dependency>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine-module</artifactId>
-        <version>1.8.3</version>
+        <version>1.8.4</version>
     </dependency>
 
 
@@ -165,7 +138,7 @@ pom.xml
 
 The easiest way is to go to
 
-    https://github.com/reyez/ninja-appengine/blob/master/ninja-appengine-demo/pom.xml
+    https://github.com/reyez/ninja-appengine/blob/master/ninja-appengine-blog-integration-test/pom.xml
     
 and copy the relevant parts to your project. In short you have to:
 
