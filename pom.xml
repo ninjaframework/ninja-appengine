@@ -36,7 +36,7 @@
 	<modules>
         <module>ninja-appengine-module</module>
         <module>ninja-appengine-integration-test-blog</module>
-        <module>ninja-appengine-archetype</module>
+        <module>ninja-appengine-blog-archetype</module>
 	</modules>
 
 	<!-- pin encoding to utf-8 -->
