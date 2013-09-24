@@ -7,6 +7,7 @@
   * 2013-09-01 Bugfix - static assets should not handle any flash or session scopes 
                https://github.com/ninjaframework/ninja/issues/109 (Sojin, ra).
   * 2013-09-14 New integration test and archetype. 
+  * 2013-09-24 Bump to Ninja 2.0.0
   
 1.8.3
 =====

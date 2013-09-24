@@ -78,7 +78,7 @@ Quick start
 
 Generate a Ninja Appengine archetype by calling the following command:
 
-    mvn archetype:generate -DarchetypeGroupId=org.ninjaframework -DarchetypeArtifactId=ninja-appengine-blog-archetype
+    mvn archetype:generate -DarchetypeGroupId=org.ninjaframework -DarchetypeArtifactId=ninja-appengine-blog-archetype -DarchetypeVersion=2.0.0
 
 This will generate a full archetype showing a simple blog complete with Objectify as 
 persistence layer. A nice archetype to start your own projects...
