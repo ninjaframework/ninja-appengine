@@ -1,3 +1,8 @@
+1.8.5
+=====
+
+  * 2013-08-26 Bump to GAE 1.8.5 / Added getModuleId to Environment implementation for compatability (ra)
+
 1.8.4
 =====
 

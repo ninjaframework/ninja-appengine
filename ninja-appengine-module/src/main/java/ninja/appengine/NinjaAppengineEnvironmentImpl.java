@@ -215,5 +215,10 @@ public class NinjaAppengineEnvironmentImpl implements
 
     }
 
+    @Override
+    public String getModuleId() {
+        throw new NotImplementedException();
+    }
+
 
 }
