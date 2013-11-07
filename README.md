@@ -130,7 +130,7 @@ pom.xml
     <dependency>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine-module</artifactId>
-        <version>1.8.4</version>
+        <version>1.8.7</version>
     </dependency>
 
 
