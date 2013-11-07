@@ -22,7 +22,7 @@
 	<groupId>org.ninjaframework</groupId>
 	<artifactId>ninja-appengine</artifactId>
 	<packaging>pom</packaging>
-	<version>1.8.7</version>
+	<version>1.8.8-SNAPSHOT</version>
 	<url>http://www.ninjaframework.org</url>
 
 	<!-- Deploy to central maven using the oss-parent of sonatype -->
