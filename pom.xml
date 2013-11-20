@@ -17,43 +17,43 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.ninjaframework</groupId>
-	<artifactId>ninja-appengine</artifactId>
-	<packaging>pom</packaging>
-	<version>1.8.8-SNAPSHOT</version>
-	<url>http://www.ninjaframework.org</url>
+    <groupId>org.ninjaframework</groupId>
+    <artifactId>ninja-appengine</artifactId>
+    <packaging>pom</packaging>
+    <version>1.8.8-SNAPSHOT</version>
+    <url>http://www.ninjaframework.org</url>
 
-	<!-- Deploy to central maven using the oss-parent of sonatype -->
-	<!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
+    <!-- Deploy to central maven using the oss-parent of sonatype -->
+    <!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
-	<modules>
+    <modules>
         <module>ninja-appengine-module</module>
         <module>ninja-appengine-integration-test-blog</module>
         <module>ninja-appengine-blog-archetype</module>
-	</modules>
+    </modules>
 
-	<!-- pin encoding to utf-8 -->
-	<properties>
-        <appengine.version>1.8.7</appengine.version>
-        <ninja.version>2.0.1</ninja.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<siteProjectVersion>${project.version}</siteProjectVersion>
-	</properties>
+    <!-- pin encoding to utf-8 -->
+    <properties>
+        <appengine.version>1.8.8</appengine.version>
+        <ninja.version>2.2.0</ninja.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <siteProjectVersion>${project.version}</siteProjectVersion>
+    </properties>
 
-	<!-- Fix version 1.7 of java compiler in all submodules: -->
-	<build>
+    <!-- Fix version 1.7 of java compiler in all submodules: -->
+    <build>
 
-		<pluginManagement>
+        <pluginManagement>
 
-			<plugins>
+            <plugins>
                 <!-- We use the compiler together with Google's error-prone project. -->
                 <!-- Error-prone is a bit like findbugs, but at compile time and  -->
                 <!-- helps to prevent bugs. -->
@@ -79,31 +79,30 @@
                         <forkCount>1</forkCount>
                     </configuration>
                 </plugin>
-			 </plugins>
-		</pluginManagement>
-	</build>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-	<scm>
-		<url>https://github.com/reyez/ninja-appengine</url>
-		<connection>scm:git://github.com/reyez/ninja-appengine.git</connection>
-		<developerConnection>scm:git:git@github.com:reyez/ninja-appengine.git</developerConnection>
-	</scm>
-	
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/reyez/ninja-appengine/issues/</url>
-	</issueManagement>
+    <scm>
+        <url>https://github.com/reyez/ninja-appengine</url>
+        <connection>scm:git://github.com/reyez/ninja-appengine.git</connection>
+        <developerConnection>scm:git:git@github.com:reyez/ninja-appengine.git</developerConnection>
+    </scm>
 
-	<mailingLists>
-		<mailingList>
-			<name>Ninja Web Framework Users</name>
-			<post>ninja-framework@googlegroups.com</post>
-			<archive>http://groups.google.com/group/ninja-framework</archive>
-		</mailingList>
-	</mailingLists>
-	
-	
-	   <profiles>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/reyez/ninja-appengine/issues/</url>
+    </issueManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>Ninja Web Framework Users</name>
+            <post>ninja-framework@googlegroups.com</post>
+            <archive>http://groups.google.com/group/ninja-framework</archive>
+        </mailingList>
+    </mailingLists>
+
+    <profiles>
         <!-- Do a license check by running : mvn -P license license:check -->
         <!-- Update the license check by running : mvn -P license license:format -->
         <profile>
