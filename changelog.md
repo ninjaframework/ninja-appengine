@@ -1,3 +1,9 @@
+1.8.9
+=====
+
+  * 2013-11-20 Bump to GAE 1.8.9 (ra)
+  * 2013-11-20 Bump to Ninja 2.5.1 (also in archetype) (ra)
+
 1.8.8
 =====
 

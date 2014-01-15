@@ -210,15 +210,15 @@
 
         <dependency>
             <groupId>org.ninjaframework</groupId>
+            <artifactId>ninja-appengine-module</artifactId>
+            <version>1.8.9-SNAPSHOT</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-test-utilities</artifactId>
             <version>${ninja.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.ninjaframework</groupId>
-            <artifactId>ninja-appengine-module</artifactId>
-            <version>1.8.9-SNAPSHOT</version>
         </dependency>
 
         <dependency>
