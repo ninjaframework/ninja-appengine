@@ -272,7 +272,9 @@
         <!-- It is especially important that these dependencies do not get 
             deployed in reality. -->
         <profile>
-            <id>appengine-dev</id><!-- that's the ninja mode to filter in 
+            <!-- To run Ninja via the devserver. -->
+            <!-- "mvn appengine:devserver -Pdevserver"-->
+            <id>devserver</id><!-- that's the ninja mode to filter in 
                 appengine-web.xml -->
             <properties>
                 <!-- that's the ninja mode to filter in appengine-web.xml -->
@@ -317,6 +319,8 @@
         </profile>
 
         <profile>
+            <!-- To run Ninja via jetty. Usually via -->
+            <!-- "mvn jetty:run -Pjettyrun" -->
             <id>jetty-dev</id><!-- that's the ninja mode to filter in appengine-web.xml -->
             <properties>
                 <!-- that's the ninja mode to filter in appengine-web.xml -->
@@ -358,7 +362,9 @@
         </profile>
 
         <profile>
-            <id>deployment</id>
+            <!-- To deploy a new version. Usually --> 
+            <!-- via mvn "appengine:update -Pupdate" -->
+            <id>update</id>
             <properties>
                 <!-- That's the Ninja mode to filter in appengine-web.xml -->
                 <ninja.mode>prod</ninja.mode>

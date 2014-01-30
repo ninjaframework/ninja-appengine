@@ -1,3 +1,10 @@
+X.X.X
+=====
+
+ * 2014-01-29 Compatible with ninja-3.0.0. (ra)
+ * 2014-01-29 Changed profile names to match appengine goals => deployment is now "update"
+              and appengine-dev is not "devserver". (ra)
+
 1.8.9
 =====
 

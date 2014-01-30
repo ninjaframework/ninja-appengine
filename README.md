@@ -89,7 +89,7 @@ Deployment
 
 Is as easy as:
 
-    mvn clean appengine:update -Pdeployment
+    mvn clean appengine:update -Pupdate
     
     
 Starting
@@ -97,7 +97,7 @@ Starting
 
 Use the devserver of GAE:
 
-   mvn appengine:devserver -Pappengine-dev 
+   mvn appengine:devserver -Pdevserver
    (built-in admin tools, but setting up productive reloading requires one more step)
 
 
@@ -142,7 +142,7 @@ The easiest way is to go to
     
 and copy the relevant parts to your project. In short you have to:
 
-- Have profiles for deployment, appengine-dev and jetty-dev.
+- Have profiles for "update", "devserver" and "jetty-dev".
 - Configure the appengine libraries with the correct scopes
 - Set the build output dir consistently
 
@@ -173,7 +173,7 @@ appengine-web.xml
 The Appengine xml is pretty default. The only difference is that we are setting
 the Ninja mode via a system property. Now the whole process inside the pom.xml
 makes more sense I guess :) ${ninja.mode} is simply the variable getting exchanged
-with "prod" in case of the deployment profile and "dev" else...
+with "prod" in case of the update profile and "dev" else...
 
     <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 
@@ -186,8 +186,8 @@ with "prod" in case of the deployment profile and "dev" else...
     
         <threadsafe>true</threadsafe>
     
-        <!-- will be set to "prod" when runnin mvn with profile deployment -->
-        <!-- eg: mvn install gae:deploy -Pdeployment -->
+        <!-- will be set to "prod" when running mvn with profile update -->
+        <!-- eg: mvn install appengine:update -Pupdate -->
         <system-properties>
             <property name="ninja.mode" value="${ninja.mode}" />
         </system-properties>
