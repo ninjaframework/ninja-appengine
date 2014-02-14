@@ -121,6 +121,12 @@
                     </scanTargetPatterns>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.ninjaframework.org</groupId>
+                <artifactId>ninja-maven-plugin</artifactId>
+                <version>${ninja.version}</version>
+            </plugin>
 
             <plugin>
                 <!-- It is not really recommended to use mvn appengine:devserver, 
@@ -210,15 +216,15 @@
 
         <dependency>
             <groupId>org.ninjaframework</groupId>
+            <artifactId>ninja-appengine-module</artifactId>
+            <version>${ninja-appengine.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-test-utilities</artifactId>
             <version>${ninja.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.ninjaframework</groupId>
-            <artifactId>ninja-appengine-module</artifactId>
-            <version>${ninja-appengine.version}</version>
         </dependency>
 
         <dependency>
