@@ -1,8 +1,14 @@
-X.X.X
+1.9.0
 =====
+ * 2014-02-27 Compatible with Ninja 3.0.3. (ra)
+ * 2014-02-27 Support for GAE 1.9.0. (ra)
+
+
+1.8.9.1
+=======
 
  * 2014-01-29 Added fool proof release dependency management to archetype. (ra)
- * 2014-01-29 Compatible with ninja-3.0.0. (ra)
+ * 2014-01-29 Compatible with ninja-3.0.2. (ra)
  * 2014-01-29 Changed profile names to match appengine goals => deployment is now "update"
               and appengine-dev is not "devserver". (ra)
 
