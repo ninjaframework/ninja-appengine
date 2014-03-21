@@ -97,8 +97,8 @@ Starting
 
 Use the devserver of GAE:
 
-   mvn appengine:devserver -Pdevserver
-   (built-in admin tools, but setting up productive reloading requires one more step)
+    mvn appengine:devserver -Pdevserver
+    (built-in admin tools, but setting up productive reloading requires one more step)
 
 
 Testing

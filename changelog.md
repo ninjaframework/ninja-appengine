@@ -1,5 +1,14 @@
+1.9.1
+=====
+
+ * 2014-03-21 Bump to GAE 1.9.1 (ra)
+ * 2014-03-21 Bump to Ninja 3.1.2 (ra)
+ * 2014-03-21 Fix of controller that wanted to send html instead of json/xml. (ra)
+ * 2014-02-21 Tinx fix in documentation (indendation wrong) (ra)
+
 1.9.0
 =====
+
  * 2014-02-27 Compatible with Ninja 3.0.3. (ra)
  * 2014-02-27 Support for GAE 1.9.0. (ra)
 
