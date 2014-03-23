@@ -42,7 +42,7 @@
     <!-- pin encoding to utf-8 -->
     <properties>
         <appengine.version>1.9.1</appengine.version>
-        <ninja.version>3.1.2</ninja.version>
+        <ninja.version>3.1.3</ninja.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <siteProjectVersion>${project.version}</siteProjectVersion>
@@ -54,6 +54,19 @@
         <pluginManagement>
 
             <plugins>
+                
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <!-- bump submodule versions automatically -->
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <!-- install next final version in local repo, so that
+                             tests on archetypes work -->
+                        <completionGoals>clean install</completionGoals>
+                    </configuration>
+                </plugin>
+                
                 <!-- We use the compiler together with Google's error-prone project. -->
                 <!-- Error-prone is a bit like findbugs, but at compile time and  -->
                 <!-- helps to prevent bugs. -->

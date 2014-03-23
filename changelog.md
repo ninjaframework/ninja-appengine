@@ -1,3 +1,9 @@
+X.X.X
+=====
+
+ * 2014-03-23 Enabled testing of archetype (ra)
+ * 2014-03-23 Bump to Ninja 3.1.3 (ra)
+
 1.9.1
 =====
 
