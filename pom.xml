@@ -63,14 +63,20 @@
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <!-- install next final version in local repo, so that
                              tests on archetypes work -->
-                        <completionGoals>clean install</completionGoals>
+                        <preparationGoals>clean install</preparationGoals>
                     </configuration>
                 </plugin>
                 
-                <!-- We use the compiler together with Google's error-prone project. -->
-                <!-- Error-prone is a bit like findbugs, but at compile time and  -->
-                <!-- helps to prevent bugs. -->
-                <!-- More at: https://code.google.com/p/error-prone/ -->
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <configuration>
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                    </configuration>
+                </plugin>
+                
+                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
