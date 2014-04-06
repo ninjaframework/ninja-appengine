@@ -1,6 +1,7 @@
-X.X.X
+1.9.2
 =====
 
+ * 2014-04-08 Bump to Ninja 3.1.4 and GAE 1.9.2 (ra)
  * 2014-03-23 Enabled testing of archetype (ra)
  * 2014-03-23 Bump to Ninja 3.1.3 (ra)
 
