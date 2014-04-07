@@ -21,14 +21,6 @@
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
     </properties>
 
-
-    <repositories>
-        <repository>
-            <id>objectify-appengine</id>
-            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
-        </repository>
-    </repositories>
-
     <build>
         <!-- Default output dir, so that appengine devserver picks up changes: -->
         <!-- To trigger automatic restarts you have to touch appengine-web.xml -->
