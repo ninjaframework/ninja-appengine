@@ -20,10 +20,25 @@
 
     <dependencies>
     
+        <!-- Add Slf4j to java commons logging bridge for nice logging on GAE -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+
+        <!-- Exclude logback classic so that we only have one slf4j logging -->
+        <!-- implementation on the classpath. -->
         <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-servlet</artifactId>
             <version>${ninja.version}</version>
+             <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion> 
+            </exclusions>
         </dependency>
 
 

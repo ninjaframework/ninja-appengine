@@ -42,7 +42,7 @@
     <!-- pin encoding to utf-8 -->
     <properties>
         <appengine.version>1.9.2</appengine.version>
-        <ninja.version>3.1.4</ninja.version>
+        <ninja.version>3.1.5-SNAPSHOT</ninja.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <siteProjectVersion>${project.version}</siteProjectVersion>

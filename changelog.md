@@ -1,7 +1,8 @@
 X.X.X
 =====
 
- * 2014-04-08 Bump to objectify 4.1.2 (ra)
+ * 2014-04-08 Added support for better logging via jcl. (Nomi + ra)
+ * 2014-04-08 Bump to objectify 4.1.2. (ra)
 
 1.9.2
 =====
