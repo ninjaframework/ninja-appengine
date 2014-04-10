@@ -6,6 +6,7 @@ import ninja.lifecycle.Start;
 import ninja.utils.NinjaProperties;
 
 import com.google.inject.Inject;
+import com.googlecode.objectify.Objectify;
 
 @Singleton
 public class StartupActions {
@@ -22,7 +23,7 @@ public class StartupActions {
         
         if (ninjaProperties.isDev()) {
             
-            OfyService.setup();
+            ObjectifyProvider.setup();
             
         }
         

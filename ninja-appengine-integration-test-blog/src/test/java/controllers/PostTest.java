@@ -11,8 +11,7 @@ import models.User;
 import org.junit.Test;
 
 import com.googlecode.objectify.Objectify;
-
-import conf.OfyService;
+import conf.ObjectifyProvider;
 
 public class PostTest extends NinjaAppengineBackendTest {
 
@@ -21,8 +20,8 @@ public class PostTest extends NinjaAppengineBackendTest {
     @Test
     public void testCreatePost() {
         
-        Objectify ofy = OfyService.ofy(); 
-        
+        ObjectifyProvider objectifyProvider = new ObjectifyProvider();
+        Objectify ofy = objectifyProvider.get();
         
         // Create a new user and save it
         User anotherBob = new User("another_bob@gmail.com", "secret", "Bob");

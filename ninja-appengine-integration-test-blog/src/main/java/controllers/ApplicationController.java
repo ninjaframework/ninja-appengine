@@ -29,8 +29,8 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
+import conf.ObjectifyProvider;
 
-import conf.OfyService;
 import dao.ArticleDao;
 import ninja.appengine.AppEngineEnvironment;
 
@@ -53,7 +53,7 @@ public class ApplicationController {
      */
     public Result setup() {
         
-        OfyService.setup();
+        ObjectifyProvider.setup();
         
         return Results.ok();
         

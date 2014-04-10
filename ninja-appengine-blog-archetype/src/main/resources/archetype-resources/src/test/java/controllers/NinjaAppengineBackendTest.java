@@ -9,8 +9,7 @@ import org.junit.Before;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.ObjectifyFilter;
-
-import conf.OfyService;
+import conf.ObjectifyProvider;
 
 public class NinjaAppengineBackendTest {
 
@@ -20,7 +19,7 @@ public class NinjaAppengineBackendTest {
     @Before
     public void setUp() {
         helper.setUp();
-        OfyService.setup();
+        ObjectifyProvider.setup();
     }
 
     @After

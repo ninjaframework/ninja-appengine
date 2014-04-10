@@ -1,20 +1,21 @@
 package dao;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import models.User;
 
 import com.googlecode.objectify.Objectify;
 
-import conf.OfyService;
-
 public class UserDao {
 
+    @Inject
+    Provider<Objectify> objectify;
     
     public boolean isUserAndPasswordValid(String username, String password) {
         
         if (username != null && password != null) {
 
-            Objectify ofy = OfyService.ofy();
-            User user = ofy.load().type(User.class)
+            User user = objectify.get().load().type(User.class)
                     .filter("username", username).first().now();
             
             if (user != null) {

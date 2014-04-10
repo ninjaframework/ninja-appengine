@@ -52,26 +52,43 @@ using @FilterWith.
 This is needed to setup the dev environment. If you forget this you'll get a lot
 of strange error messages especially in tests.
     
-When using persistence you have to register your objectify models via an OfyService.
-Please refer to https://code.google.com/p/objectify-appengine/wiki/BestPractices OfyService.
-The OfyService will look roughly like the following class.
-We usually put the class under conf.OfyService.
+When using persistence you have to register your objectify models.
+Please refer to https://code.google.com/p/objectify-appengine/wiki/BestPractices OfyService
+for some best practises.
+
+In Ninja's context it is best to create a Guice Provider. That we you are able
+to inject Objectify into your classes. We usually put the class under conf.ObjectifyProvider:
 
 
-    public class OfyService {
+    public class ObjectifyProvider implements Provider<Objectify> {
+    
         static {
-            factory().register(Thing.class);
-            factory().register(OtherThing.class);
+            factory().register(Model1.class);
+            factory().register(Model2.class);
             ...etc
         }
 
-        public static Objectify ofy() {
+        @Override
+        public Objectify get() {
             return ObjectifyService.ofy();
         }
 
-        public static ObjectifyFactory factory() {
-            return ObjectifyService.factory();
+    }
+
+You then have to bind your Provider in your conf.Module class:
+
+    public class Module extends AbstractModule {
+
+
+        protected void configure() {
+
+            // bind your Objectify.class to your provider like so:
+            bind(Objectify.class).toProvider(ObjectifyProvider.class);
+
+            install(new AppEngineModule());        
+
         }
+
     }
         
 More about Objectify: https://code.google.com/p/objectify-appengine/

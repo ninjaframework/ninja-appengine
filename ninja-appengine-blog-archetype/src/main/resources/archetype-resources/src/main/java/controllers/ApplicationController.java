@@ -16,7 +16,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package controllers;
 
 import java.util.List;
@@ -32,12 +31,15 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
+import conf.ObjectifyProvider;
 
-import conf.OfyService;
 import dao.ArticleDao;
+import ninja.appengine.AppEngineEnvironment;
 
 @Singleton
-@FilterWith(AppEngineFilter.class)
+// Just a test to make sure @AppEngineEnvironment works.
+// Usually @FilterWith(AppEngineFilter.class is much better.
+@AppEngineEnvironment 
 public class ApplicationController {
 
     @Inject
@@ -53,7 +55,7 @@ public class ApplicationController {
      */
     public Result setup() {
         
-        OfyService.setup();
+        ObjectifyProvider.setup();
         
         return Results.ok();
         

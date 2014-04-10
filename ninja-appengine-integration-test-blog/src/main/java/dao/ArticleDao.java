@@ -9,19 +9,19 @@ import models.ArticlesDto;
 import models.User;
 
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 
-import conf.OfyService;
-
 public class ArticleDao {
-
+    
+    @Inject
+    Provider<Objectify> objectify;
     
     public ArticlesDto getAllArticles() {
         
-        Objectify ofy = OfyService.ofy();
-        
         ArticlesDto articlesDto = new ArticlesDto();
-        articlesDto.articles = ofy.load().type(Article.class).list();
+        articlesDto.articles = objectify.get().load().type(Article.class).list();
         
         return articlesDto;
         
@@ -30,9 +30,7 @@ public class ArticleDao {
     
     public Article getFirstArticleForFrontPage() {
         
-        Objectify ofy = OfyService.ofy();
-        
-        Article frontPost = ofy.load().type(Article.class).order("-postedAt").first()
+        Article frontPost = objectify.get().load().type(Article.class).order("-postedAt").first()
                 .now();
         return frontPost;
         
@@ -40,8 +38,8 @@ public class ArticleDao {
     }
     
     public List<Article> getOlderArticlesForFrontPage() {
-        Objectify ofy = OfyService.ofy();
-        List<Article> olderPosts = ofy.load().type(Article.class).order("-postedAt")
+
+        List<Article> olderPosts = objectify.get().load().type(Article.class).order("-postedAt")
                 .offset(1).limit(10).list();
         
         return olderPosts;
@@ -51,8 +49,7 @@ public class ArticleDao {
     
     public Article getArticle(Long id) {
         
-        Objectify ofy = OfyService.ofy();
-        Article article = ofy.load().type(Article.class).filter("id", id).first()
+        Article article = objectify.get().load().type(Article.class).filter("id", id).first()
                 .now();
         
         return article;
@@ -64,15 +61,14 @@ public class ArticleDao {
      */
     public boolean postArticle(String username, ArticleDto articleDto) {
         
-        Objectify ofy = OfyService.ofy();
-        User user = ofy.load().type(User.class).filter("username", username).first().now();
+        User user = objectify.get().load().type(User.class).filter("username", username).first().now();
         
         if (user == null) {
             return false;
         }
         
         Article article = new Article(user, articleDto.title, articleDto.content);
-        ofy.save().entity(article);
+        objectify.get().save().entity(article);
         
         return true;
         
