@@ -38,12 +38,16 @@ ninja-appengine is released along with the GAE SDK. Therefore we use the same ve
 For instance ninja-appengine 1.8.4 uses SDK 1.8.4.
 
 Usage is straight forward. The most important thing you have to keep in mind is to annotate 
-your controller classes with
+your controller classes with @FilterWith(AppEngineFilter.class)
 
     @FilterWith(AppEngineFilter.class)
     public class MyController {
         ...
     }
+
+If you cannot use @FilterWith because you are developing a library you can also
+use annotation @AppEngineEnvironment on classes or methods. But you should prefer
+using @FilterWith.
     
 This is needed to setup the dev environment. If you forget this you'll get a lot
 of strange error messages especially in tests.

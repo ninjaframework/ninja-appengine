@@ -32,9 +32,12 @@ import com.googlecode.objectify.Objectify;
 
 import conf.OfyService;
 import dao.ArticleDao;
+import ninja.appengine.AppEngineEnvironment;
 
 @Singleton
-@FilterWith(AppEngineFilter.class)
+// Just a test to make sure @AppEngineEnvironment works.
+// Usually @FilterWith(AppEngineFilter.class is much better.
+@AppEngineEnvironment 
 public class ApplicationController {
 
     @Inject
