@@ -21,11 +21,11 @@
 
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 
-	<application>raplayground</application>
-	<version>2013-04-06-1</version>
+    <application>APP_NAME</application>
+    <version>VERSION</version>
 
-	<static-files>
-        <include path="/static/**" />
+    <static-files>
+        <include path="/assets/**" />
     </static-files>
     
     <threadsafe>true</threadsafe>
