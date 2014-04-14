@@ -1,6 +1,7 @@
 X.X.X
 =====
 
+ * 2014-04-14 Bump to objectify 4.1.3. (ra)
  * 2014-04-10 Added support for @AppEngineEnvironment annotation that allows to
               use the AppEngineEnvironment in non-controller classes. Needed
               ins some cases - for instance for modules like ninja-casino (ra).
