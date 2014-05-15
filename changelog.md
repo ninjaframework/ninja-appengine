@@ -1,6 +1,8 @@
 X.X.X
 =====
 
+ * 2014-05-15 Bump to Ninja 3.1.5. (ra) 
+ * 2014-05-15 Bump to GAE 1.9.4. (ra) 
  * 2014-04-14 Bump to objectify 4.1.3. (ra)
  * 2014-04-10 Added support for @AppEngineEnvironment annotation that allows to
               use the AppEngineEnvironment in non-controller classes. Needed
