@@ -22,20 +22,11 @@ In particular it provides:
 - The default Mailer.
 - Everything else is absolutely standard Ninja.
 
-
-IMPORTANT NOTES
-===============
-
-- Please upgrade to at least appengine-ninja 1.8.3 asap as previous versions contain a security issue. Please find more
-  at the release notes of Ninja 1.6.0.
-- From 1.8.3 onwards you need Maven 3.1 to build your GAE projects.
-
-
 Usage
 =====
 
 ninja-appengine is released along with the GAE SDK. Therefore we use the same version.
-For instance ninja-appengine 1.8.4 uses SDK 1.8.4.
+For instance ninja-appengine 1.9.9 uses SDK 1.9.9.
 
 Usage is straight forward. The most important thing you have to keep in mind is to annotate 
 your controller classes with @FilterWith(AppEngineFilter.class)
@@ -150,7 +141,7 @@ pom.xml
     <dependency>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine-module</artifactId>
-        <version>1.8.7</version>
+        <version>1.9.9</version>
     </dependency>
 
 
