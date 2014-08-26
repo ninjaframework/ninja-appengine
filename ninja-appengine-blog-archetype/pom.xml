@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine</artifactId>
-        <version>1.9.9</version>
+        <version>1.9.10-SNAPSHOT</version>
     </parent>
 
     <artifactId>ninja-appengine-blog-archetype</artifactId>
@@ -69,7 +69,7 @@
         <connection>scm:git://github.com/reyez/ninja-appengine.git/ninja-appengine-integration-test-blog</connection>
         <developerConnection>scm:git:git@github.com:reyez/ninja-appengine.git/ninja-appengine-integration-test-blog</developerConnection>
         <url>https://github.com/reyez/ninja-appengine/ninja-appengine-integration-test-blog</url>
-      <tag>ninja-appengine-1.9.9</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <distributionManagement>
