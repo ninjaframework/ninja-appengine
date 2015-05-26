@@ -115,8 +115,7 @@
             </plugin>
 
             <plugin>
-                <!-- It is not really recommended to use mvn appengine:devserver, 
-                    instead use jetty:run -->
+                <!-- Use App Engine's own Devserver when running Ninja, jetty:run may not work -->
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>${appengine.version}</version>
