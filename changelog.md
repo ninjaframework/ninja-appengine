@@ -1,6 +1,7 @@
 1.9.23
 ======
 
+ * 2015-07-02 Bump to Objectify 5.1.5 (ra)
  * 2015-07-01 Bump to Ninja 4.1.4 / GAE 1.9.23 (ra)
 
 1.9.18
