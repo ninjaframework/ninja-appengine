@@ -10,7 +10,7 @@
 Google App Engine support for Ninja
 ===================================
 
-- CI: https://buildhive.cloudbees.com/job/ninjaframework/job/ninja-appengine
+- Continuous integration: [![Build Status](https://api.travis-ci.org/ninjaframework/ninja-appengine.svg)](https://travis-ci.org/ninjaframework/ninja-appengine)
 - Mailing list and forum:  https://groups.google.com/forum/#!forum/ninja-framework
 - More about Ninja: http://www.ninjaframework.org
 
