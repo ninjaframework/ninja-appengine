@@ -49,7 +49,7 @@ public class ArticleDao {
     
     public Article getArticle(Long id) {
         
-        Article article = objectify.get().load().type(Article.class).filterKey(id).first().now();
+        Article article = objectify.get().load().type(Article.class).id(id).now();
         
         return article;
         
