@@ -44,7 +44,7 @@ This is needed to setup the dev environment. If you forget this you'll get a lot
 of strange error messages especially in tests.
     
 When using persistence you have to register your objectify models.
-Please refer to https://code.google.com/p/objectify-appengine/wiki/BestPractices OfyService
+Please refer to https://github.com/objectify/objectify/wiki/BestPractices Of Service
 for some best practises.
 
 In Ninja's context it is best to create a Guice Provider. That we you are able
@@ -82,7 +82,7 @@ You then have to bind your Provider in your conf.Module class:
 
     }
         
-More about Objectify: https://code.google.com/p/objectify-appengine/
+More about Objectify: https://github.com/objectify/objectify
 
 
 Quick start
