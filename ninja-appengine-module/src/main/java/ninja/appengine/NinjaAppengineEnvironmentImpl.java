@@ -26,6 +26,7 @@ import ninja.utils.NinjaProperties;
 import org.apache.commons.lang.NotImplementedException;
 
 import com.google.appengine.api.datastore.dev.LocalDatastoreService;
+import com.google.appengine.api.search.dev.LocalSearchService;
 import com.google.appengine.repackaged.com.google.common.io.Files;
 import com.google.appengine.tools.development.ApiProxyLocal;
 import com.google.appengine.tools.development.ApiProxyLocalFactory;
@@ -76,6 +77,9 @@ public class NinjaAppengineEnvironmentImpl implements
                         .println("In test mode - not saving Appengine data to disk");
 
                 proxy.setProperty(LocalDatastoreService.NO_STORAGE_PROPERTY,
+                        Boolean.toString(true));
+
+                proxy.setProperty(LocalSearchService.USE_RAM_DIRECTORY,
                         Boolean.toString(true));
 
             } else {
