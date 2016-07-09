@@ -24,15 +24,20 @@
     <packaging>pom</packaging>
     <version>1.9.35-SNAPSHOT</version>
     <url>http://www.ninjaframework.org</url>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>A module to make Ninja a joy to use with Google's AppEngine. Nina is a full stack web framework for Java.</description>
 
-    <!-- Deploy to central maven using the oss-parent of sonatype -->
-    <!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
-
+    <developers>
+        <developer>
+            <name>Raphael A. Bauer</name>
+            <email>ra@raphaelbauer.com</email>
+            <url>http://www.raphaelbauer.com</url>
+            <roles>
+                <role>Lead Architect</role>
+            </roles>
+        </developer>
+    </developers>
+            
     <modules>
         <module>ninja-appengine-module</module>
         <module>ninja-appengine-integration-test-blog</module>
@@ -53,17 +58,31 @@
 
         <pluginManagement>
 
-            <plugins>
-                
-                <plugin>
+            <plugins>      
+                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>2.5</version>
                     <configuration>
                         <!-- bump submodule versions automatically -->
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <!-- install next final version in local repo, so that
-                             tests on archetypes work -->
+                        tests on archetypes work -->
                         <preparationGoals>clean install</preparationGoals>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy</goals>
+                    </configuration>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.3</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
                 
@@ -158,6 +177,53 @@
                             <execution>
                                 <goals>
                                     <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
                                 </goals>
                             </execution>
                         </executions>
