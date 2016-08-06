@@ -22,17 +22,22 @@
     <groupId>org.ninjaframework</groupId>
     <artifactId>ninja-appengine</artifactId>
     <packaging>pom</packaging>
-    <version>1.9.35-SNAPSHOT</version>
+    <version>1.9.39-SNAPSHOT</version>
     <url>http://www.ninjaframework.org</url>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>A module to make Ninja a joy to use with Google's AppEngine. Nina is a full stack web framework for Java.</description>
 
-    <!-- Deploy to central maven using the oss-parent of sonatype -->
-    <!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
-
+    <developers>
+        <developer>
+            <name>Raphael A. Bauer</name>
+            <email>ra@raphaelbauer.com</email>
+            <url>http://www.raphaelbauer.com</url>
+            <roles>
+                <role>Lead Architect</role>
+            </roles>
+        </developer>
+    </developers>
+            
     <modules>
         <module>ninja-appengine-module</module>
         <module>ninja-appengine-integration-test-blog</module>
@@ -41,29 +46,48 @@
 
     <!-- pin encoding to utf-8 -->
     <properties>
-        <appengine.version>1.9.34</appengine.version>
-        <ninja.version>5.5.0</ninja.version>
+        <appengine.version>1.9.38</appengine.version>
+        <ninja.version>5.7.0</ninja.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <siteProjectVersion>${project.version}</siteProjectVersion>
-    </properties>
+    </properties> 
 
-    <!-- Fix version 1.7 of java compiler in all submodules: -->
     <build>
 
         <pluginManagement>
 
-            <plugins>
-                
-                <plugin>
+            <plugins>      
+                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>2.5</version>
                     <configuration>
                         <!-- bump submodule versions automatically -->
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <!-- install next final version in local repo, so that
-                             tests on archetypes work -->
+                        tests on archetypes work -->
                         <preparationGoals>clean install</preparationGoals>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy</goals>
+                    </configuration>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.3</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
                 
@@ -103,15 +127,15 @@
     </build>
 
     <scm>
-        <url>https://github.com/reyez/ninja-appengine</url>
-        <connection>scm:git://github.com/reyez/ninja-appengine.git</connection>
-        <developerConnection>scm:git:git@github.com:reyez/ninja-appengine.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+        <url>https://github.com/ninjaframework/ninja-appengine</url>
+        <connection>scm:git://github.com/ninjaframework/ninja-appengine.git</connection>
+        <developerConnection>scm:git:git@github.com:ninjaframework/ninja-appengine.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/reyez/ninja-appengine/issues/</url>
+        <url>https://github.com/ninjaframework/ninja-appengine/issues/</url>
     </issueManagement>
 
     <mailingLists>
@@ -121,6 +145,25 @@
             <archive>http://groups.google.com/group/ninja-framework</archive>
         </mailingList>
     </mailingLists>
+    
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <profiles>
         <!-- Do a license check by running : mvn -P license license:check -->
@@ -158,6 +201,53 @@
                             <execution>
                                 <goals>
                                     <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
                                 </goals>
                             </execution>
                         </executions>
