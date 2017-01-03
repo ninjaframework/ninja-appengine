@@ -79,6 +79,9 @@ public class NinjaAppengineEnvironmentImpl implements
                 proxy.setProperty(LocalDatastoreService.NO_STORAGE_PROPERTY,
                         Boolean.toString(true));
 
+                proxy.setProperty(LocalDatastoreService.FORCE_IS_HIGH_REP_PROPERTY,
+                        Boolean.toString(true));
+
                 proxy.setProperty(LocalSearchService.USE_RAM_DIRECTORY,
                         Boolean.toString(true));
 
