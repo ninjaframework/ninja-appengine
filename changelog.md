@@ -1,3 +1,10 @@
+1.9.48-beta2
+============
+
+ * Bump to Ninja 6.0.0-beta2
+ * Latest objectify and Logback versions
+
+
 1.9.48-beta1
 ============
 
