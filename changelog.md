@@ -1,3 +1,10 @@
+1.9.50
+======
+
+ * Bump to Ninja 6.0.0
+ * Bump to latest objectify and slf4j libs
+
+
 1.9.50-rc1
 ============
 
