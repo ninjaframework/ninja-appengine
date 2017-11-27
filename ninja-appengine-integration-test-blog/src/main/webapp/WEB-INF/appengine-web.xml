@@ -20,19 +20,19 @@
 
     <application>APP_NAME</application>
     <version>VERSION</version>
+    <runtime>java8</runtime>
 
     <static-files>
         <include path="/assets/**" />
     </static-files>
-    
+
     <threadsafe>true</threadsafe>
-    
+
     <!-- will be set to "prod" when runnin mvn with profile deployment -->
     <!-- eg: mvn install -Pdeployment -->
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
         <property name="ninja.mode" value="${ninja.mode}" />
     </system-properties>
-    
-</appengine-web-app>
 
+</appengine-web-app>
