@@ -15,7 +15,7 @@
     <parent>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine</artifactId>
-        <version>1.9.60</version>
+        <version>1.9.61-SNAPSHOT</version>
     </parent>
 
     <dependencies>
