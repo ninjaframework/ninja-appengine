@@ -25,7 +25,7 @@
     <version>1.9.60.2-SNAPSHOT</version>
     <url>http://www.ninjaframework.org</url>
     <description>A module to make Ninja a joy to use with Google's AppEngine. Nina is a full stack web framework for Java.</description>
-
+    <name>ninja-appengine</name><!-- Don't remove - needed for sonatype maven release -->
     <developers>
         <developer>
             <name>Raphael A. Bauer</name>
