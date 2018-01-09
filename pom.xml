@@ -24,7 +24,6 @@
     <packaging>pom</packaging>
     <version>1.9.61-SNAPSHOT</version>
     <url>http://www.ninjaframework.org</url>
-    <name>${project.groupId}:${project.artifactId}</name>
     <description>A module to make Ninja a joy to use with Google's AppEngine. Nina is a full stack web framework for Java.</description>
 
     <developers>
@@ -47,7 +46,7 @@
     <!-- pin encoding to utf-8 -->
     <properties>
         <appengine.version>1.9.60</appengine.version>
-        <ninja.version>6.2.1</ninja.version>
+        <ninja.version>6.2.2</ninja.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <siteProjectVersion>${project.version}</siteProjectVersion>
