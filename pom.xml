@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (C) 2012 the original author or authors.
+    Copyright (C) 2012-2018 the original author or authors.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -45,8 +45,8 @@
 
     <!-- pin encoding to utf-8 -->
     <properties>
-        <appengine.version>1.9.60</appengine.version>
-        <ninja.version>6.2.2</ninja.version>
+        <appengine.version>1.9.65</appengine.version>
+        <ninja.version>6.3.0</ninja.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <siteProjectVersion>${project.version}</siteProjectVersion>
