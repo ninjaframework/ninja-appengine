@@ -1,6 +1,12 @@
 1.9.71
 ======
 
+ * Bump to Ninja 6.5.0
+ * Bump to GAE 1.9.74
+
+1.9.71
+======
+
  * Bump to Ninja 6.4.2
  * Bump to GAE 1.9.71
 
