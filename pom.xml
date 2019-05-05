@@ -22,7 +22,7 @@
     <groupId>org.ninjaframework</groupId>
     <artifactId>ninja-appengine</artifactId>
     <packaging>pom</packaging>
-    <version>1.9.74</version>
+    <version>1.9.75-SNAPSHOT</version>
     <url>http://www.ninjaframework.org</url>
     <description>A module to make Ninja a joy to use with Google's AppEngine. Nina is a full stack web framework for Java.</description>
     <name>ninja-appengine</name><!-- Don't remove - needed for sonatype maven release -->
@@ -129,7 +129,7 @@
         <url>https://github.com/ninjaframework/ninja-appengine</url>
         <connection>scm:git://github.com/ninjaframework/ninja-appengine.git</connection>
         <developerConnection>scm:git:git@github.com:ninjaframework/ninja-appengine.git</developerConnection>
-        <tag>ninja-appengine-1.9.74</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
