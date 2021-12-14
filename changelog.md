@@ -1,3 +1,11 @@
+1.9.88
+======
+
+ * Bump to Ninja 6.8.1
+ * Bump to GAE 1.9.88
+ * Bump to latest slf4j-jdk14 version
+ * Bump to latest maven-source-plugin version
+
 1.9.76
 ======
 
