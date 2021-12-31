@@ -9,8 +9,8 @@
         <h1>
             <a href="/article/${frontArticle.id}">${frontArticle.title}</a>    
         </h1>  
-        <p>${frontArticle.postedAt?date}</p>  
-        <p><#noescape>${frontArticle.content}</#noescape></p>
+        <p>${frontArticle.postedAt?date}</p>
+        <p>${frontArticle.content?no_esc}</p>
     </div>
 </#if>
 
