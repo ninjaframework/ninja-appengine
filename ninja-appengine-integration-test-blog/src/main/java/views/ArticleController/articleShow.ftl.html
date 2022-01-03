@@ -5,8 +5,8 @@
 <#if article??>
 
     <h1>${article.title}</h1>  
-    <p>${article.postedAt?date}</p>  
-    <p><#noescape>${article.content}</#noescape></p>
+    <p>${article.postedAt?date}</p>
+    <p>${article.content?no_esc}</p>
     
 <#else>
     
