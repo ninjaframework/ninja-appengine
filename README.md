@@ -26,7 +26,7 @@ Usage
 =====
 
 ninja-appengine is released along with the GAE SDK. Therefore we use the same version.
-For instance ninja-appengine 1.9.9 uses SDK 1.9.9.
+For instance ninja-appengine 1.9.88 uses SDK 1.9.88.
 
 Usage is straight forward. The most important thing you have to keep in mind is to annotate 
 your controller classes with @FilterWith(AppEngineFilter.class)
@@ -141,7 +141,7 @@ pom.xml
     <dependency>
         <groupId>org.ninjaframework</groupId>
         <artifactId>ninja-appengine-module</artifactId>
-        <version>1.9.9</version>
+        <version>1.9.88</version>
     </dependency>
 
 
