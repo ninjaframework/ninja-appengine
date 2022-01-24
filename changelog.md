@@ -1,3 +1,9 @@
+1.9.89
+======
+
+* Fix "Map[String, Object] AppEngineCacheImpl::get(String[] keys)": values are now unwrap (thibaultmeyer)
+
+
 1.9.88
 ======
 

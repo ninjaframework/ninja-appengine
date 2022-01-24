@@ -87,10 +87,10 @@ public class AppEngineCacheImpl implements Cache {
         List<String> list = Arrays.asList(keys);
         Map<String, Object> map = memcacheService.getAll(list);
         Map<String, Object> result = new HashMap<String, Object>();
-        for (Object key : map.entrySet()) {
-            result.put(key.toString(), unwrap(map.get(key)));
+        for (final Map.Entry<String, Object> entrySet : map.entrySet()) {
+            result.put(entrySet.getKey(), unwrap(entrySet.getValue()));
         }
-        return map;
+        return result;
     }
 
     public long incr(String key, int by) {
